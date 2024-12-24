@@ -49,6 +49,7 @@ build_initrd()
 export PATH=/usr/bin:/bin:/sbin
 
 mount -t proc none /proc
+mount -t sysfs none /sys
 mknod /dev/null c 1 3
 chmod 666 /dev/null
 ifconfig eth0 up
