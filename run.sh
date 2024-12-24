@@ -2,9 +2,20 @@
 
 set -euo pipefail
 
-qemu-system-aarch64 \
+if [ $# -ne 1 ]; then
+    echo "usage: qemu_bin_dir"
+    exit 1
+fi
+
+qemu_bin_dir=$1; shift
+
+gdb --args $qemu_bin_dir/qemu-system-aarch64 \
     -nographic \
     -M virt,iommu=smmuv3 \
     -cpu max \
     -kernel ./out/Image \
-    -initrd ./out/initrd.cpio
+    -initrd ./out/initrd.cpio \
+
+# aarch virt already uses virtio-net-pci by default
+#    -netdev user,id=vnet \
+#    -device virtio-net-pci,netdev=vnet \

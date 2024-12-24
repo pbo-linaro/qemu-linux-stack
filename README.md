@@ -8,5 +8,5 @@ Build SMMUv3 Stack using a container.
 ./container.sh ./build.sh
 
 # run system using:
-PATH=/path/to/qemu:$PATH ./run.sh
+./run.sh /path/to/qemu/dir
 ```
