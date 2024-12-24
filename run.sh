@@ -13,6 +13,7 @@ gdb --args $qemu_bin_dir/qemu-system-aarch64 \
     -nographic \
     -M virt,iommu=smmuv3 \
     -cpu max \
+    -m 2G \
     -kernel ./out/Image \
     -initrd ./out/initrd.cpio \
 
