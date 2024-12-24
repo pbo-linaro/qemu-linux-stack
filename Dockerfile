@@ -8,4 +8,6 @@ bison \
 flex \
 bc \
 libssl-dev \
-python3
+python3 \
+rsync \
+cpio
