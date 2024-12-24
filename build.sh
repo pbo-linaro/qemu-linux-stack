@@ -48,10 +48,9 @@ build_initrd()
 
 export PATH=/usr/bin:/bin:/sbin
 
+mount -t devtmpfs none /dev
 mount -t proc none /proc
 mount -t sysfs none /sys
-mknod /dev/null c 1 3
-chmod 666 /dev/null
 ifconfig eth0 up
 ifconfig eth0 10.0.2.15 netmask 255.255.255.0 broadcast 10.0.2.255
 route add default gw 10.0.2.2
