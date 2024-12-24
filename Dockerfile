@@ -10,4 +10,5 @@ bc \
 libssl-dev \
 python3 \
 rsync \
-cpio
+cpio \
+wget

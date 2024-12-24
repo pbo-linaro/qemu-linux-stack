@@ -35,35 +35,32 @@ build_linux()
     popd
 }
 
-build_busybox()
-{
-    pushd busybox
-    make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig -j$(nproc)
-    echo "CONFIG_STATIC=y" >> .config
-    make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- install -j$(nproc) \
-        CONFIG_PREFIX=$(pwd)/out/
-    popd
-}
-
 build_initrd()
 {
     rm -rf initrd
     mkdir initrd
-    rsync -a busybox/out/ initrd/
     pushd initrd
-    ln -s bin/busybox init
-    mkdir -p etc/init.d
-    cat > etc/init.d/rcS << EOF
+    wget https://dl-cdn.alpinelinux.org/alpine/v3.21/releases/aarch64/alpine-minirootfs-3.21.0-aarch64.tar.gz
+    tar xzf alpine-*
+    rm alpine-*
+    cat > init << EOF
 #!/bin/sh
 
 export PATH=/bin:/sbin
 
-mkdir /proc
 mount -t proc none /proc
+ifconfig eth0 up
+ifconfig eth0 10.0.2.15 netmask 255.255.255.0 broadcast 10.0.2.255
+route add default gw 10.0.2.2
 sh
-poweroff
+# force shutdown
+echo o > /proc/sysrq-trigger
+sleep 10
 EOF
-    chmod +x etc/init.d/rcS
+    chmod +x init
+    cat > etc/resolv.conf << EOF
+nameserver 8.8.8.8
+EOF
     find . | cpio -o -H newc > ../initrd.cpio
     popd
 }
@@ -76,8 +73,6 @@ output()
 }
 
 clone_linux
-clone_busybox
 build_linux
-build_busybox
 build_initrd
 output
