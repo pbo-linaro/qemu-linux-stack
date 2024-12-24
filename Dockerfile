@@ -11,4 +11,6 @@ libssl-dev \
 python3 \
 rsync \
 cpio \
-wget
+wget \
+proot \
+qemu-user
