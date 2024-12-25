@@ -54,7 +54,9 @@ mount -t sysfs none /sys
 ifconfig eth0 up
 ifconfig eth0 10.0.2.15 netmask 255.255.255.0 broadcast 10.0.2.255
 route add default gw 10.0.2.2
-sh
+# we need to change tty used, to have job control
+# ttyAMA0 is the first serial console on arm systems
+busybox getty 0 ttyAMA0 -l /bin/bash -n
 # force shutdown
 echo o > /proc/sysrq-trigger
 sleep 10
@@ -63,7 +65,7 @@ EOF
     cat > etc/resolv.conf << EOF
 nameserver 8.8.8.8
 EOF
-    proot -q qemu-aarch64 -r $(pwd) sh -c 'apk update'
+    proot -q qemu-aarch64 -r $(pwd) sh -c 'apk update && apk add bash'
     find . | cpio -o -H newc > ../initrd.cpio
     popd
 }
