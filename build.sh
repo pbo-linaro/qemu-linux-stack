@@ -17,16 +17,6 @@ clone_linux()
     fi
 }
 
-clone_busybox()
-{
-    if [ ! -d busybox ]; then
-        git clone \
-            https://git.busybox.net/busybox/ \
-            --single-branch --branch 1_36_0 \
-            busybox
-    fi
-}
-
 build_linux()
 {
     pushd linux
