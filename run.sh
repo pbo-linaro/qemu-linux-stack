@@ -2,21 +2,35 @@
 
 set -euo pipefail
 
-if [ $# -ne 1 ]; then
-    echo "usage: qemu_bin_dir"
+if [ $# -lt 1 ]; then
+    echo "usage: qemu_aarch64_cmd"
     exit 1
 fi
 
-qemu_bin_dir=$1; shift
+qemu_aarch64_cmd=$*; shift
 
-gdb --args $qemu_bin_dir/qemu-system-aarch64 \
-    -nographic \
-    -M virt,iommu=smmuv3 \
-    -cpu max \
-    -m 2G \
-    -kernel ./out/Image \
-    -initrd ./out/initrd.cpio \
+tmux_session()
+{
+    qemu_cmd="$*"
+    unset TMUX
+    tmux -L PATH \
+    new-session -s smmu bash -cx "set -x; $qemu_cmd || read" \; \
+    split-window -h "./container.sh cgdb -d gdb-multiarch -ex 'set remotetimeout 99999' -ex 'target remote :1234' -ex 'b start_kernel' -ex 'c' ./out/vmlinux"
+}
 
-# aarch virt already uses virtio-net-pci by default
-#    -netdev user,id=vnet \
-#    -device virtio-net-pci,netdev=vnet \
+# nokaslr is needed to be able to debug
+# add network device
+tmux_session $qemu_aarch64_cmd \
+-nographic \
+-nodefaults \
+-serial stdio \
+-netdev user,id=vnet \
+-device virtio-net-pci,netdev=vnet \
+-M virt,iommu=smmuv3 \
+-cpu max \
+-m 2G \
+-kernel ./out/Image \
+-initrd ./out/initrd.cpio \
+-append 'nokaslr' \
+-S -s
+

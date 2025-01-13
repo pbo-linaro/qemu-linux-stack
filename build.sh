@@ -65,6 +65,7 @@ output()
     mkdir -p out
     mv ./initrd.cpio out/
     rsync ./linux/arch/arm64/boot/Image out/
+    rsync ./linux/vmlinux out/
 }
 
 clone_linux

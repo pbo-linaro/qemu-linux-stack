@@ -13,4 +13,6 @@ rsync \
 cpio \
 wget \
 proot \
-qemu-user
+qemu-user \
+gdb-multiarch \
+cgdb
