@@ -12,7 +12,7 @@ clone_linux()
     if [ ! -d linux ]; then
         git clone \
             https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/ \
-            --single-branch --branch v6.13-rc4 --depth 1 \
+            --single-branch --branch v6.13-rc7 --depth 1 \
             linux
     fi
 }
