@@ -18,6 +18,8 @@ tmux_session()
     split-window -h "./container.sh cgdb -d gdb-multiarch -ex 'set remotetimeout 99999' -ex 'set pagination off' -ex 'target remote :1234' -ex 'b start_kernel' -ex 'c' -ex 'c' ./out/vmlinux"
 }
 
+QEMU_ARGS=${QEMU_ARGS:-}
+
 # nokaslr is needed to be able to debug
 # add network device
 tmux_session $qemu_aarch64_cmd \
@@ -33,5 +35,6 @@ tmux_session $qemu_aarch64_cmd \
 -initrd ./out/initrd.cpio \
 -append 'nokaslr' \
 -virtfs local,path=$(pwd)/,mount_tag=host,security_model=mapped,readonly=on \
--S -s
+-S -s \
+$QEMU_ARGS
 
