@@ -57,7 +57,7 @@ EOF
     cat > etc/resolv.conf << EOF
 nameserver 8.8.8.8
 EOF
-    proot -q qemu-aarch64 -r $(pwd) sh -c 'apk update && apk add bash'
+    proot -q qemu-aarch64 -r $(pwd) sh -c 'apk update && apk add bash gdb'
     find . | cpio -o -H newc > ../initrd.cpio
     popd
 }
