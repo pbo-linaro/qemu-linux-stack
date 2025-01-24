@@ -41,6 +41,8 @@ export PATH=/usr/bin:/bin:/sbin
 mount -t devtmpfs none /dev
 mount -t proc none /proc
 mount -t sysfs none /sys
+mkdir /host
+mount -t 9p -o trans=virtio host /host
 ifconfig eth0 up
 ifconfig eth0 10.0.2.15 netmask 255.255.255.0 broadcast 10.0.2.255
 route add default gw 10.0.2.2

@@ -32,5 +32,6 @@ tmux_session $qemu_aarch64_cmd \
 -kernel ./out/Image \
 -initrd ./out/initrd.cpio \
 -append 'nokaslr' \
+-virtfs local,path=$(pwd)/,mount_tag=host,security_model=mapped,readonly=on \
 -S -s
 
