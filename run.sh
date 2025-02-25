@@ -26,7 +26,7 @@ tmux_session $qemu_aarch64_cmd \
 -serial stdio \
 -netdev user,id=vnet \
 -device virtio-net-pci,netdev=vnet \
--M virt,iommu=smmuv3 \
+-M virt,iommu=smmuv3,virtualization=on \
 -cpu max \
 -m 2G \
 -kernel ./out/Image \
