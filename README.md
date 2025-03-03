@@ -1,7 +1,7 @@
-QEMU SMMUv3 Stack
-=================
+QEMU/Linux Stack
+================
 
-Build/Run SMMUv3 Stack using a container.
+Build/Run QEMU/Linux using a container.
 
 ```
 # build system using:
