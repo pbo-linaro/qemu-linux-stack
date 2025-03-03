@@ -9,18 +9,7 @@ fi
 
 qemu_aarch64_cmd=$*
 
-tmux_session()
-{
-    qemu_cmd="$*"
-    unset TMUX
-    tmux -L PATH \
-    new-session -s smmu bash -cx "set -x; $qemu_cmd || read" \; \
-    split-window -h "./container.sh cgdb -d gdb-multiarch -ex 'set remotetimeout 99999' -ex 'set pagination off' -ex 'target remote :1234' -ex 'b start_kernel' -ex c ./out/vmlinux"
-}
-
-# nokaslr is needed to be able to debug
-# add network device
-tmux_session $qemu_aarch64_cmd \
+$qemu_aarch64_cmd \
 -nographic \
 -nodefaults \
 -serial stdio \
@@ -32,5 +21,4 @@ tmux_session $qemu_aarch64_cmd \
 -kernel ./out/Image \
 -initrd ./out/initrd.cpio \
 -append 'nokaslr' \
--virtfs local,path=$(pwd)/,mount_tag=host,security_model=mapped,readonly=on \
--S -s
+-virtfs local,path=$(pwd)/,mount_tag=host,security_model=mapped,readonly=on
