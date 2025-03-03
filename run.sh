@@ -7,7 +7,7 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-qemu_aarch64_cmd=$*; shift
+qemu_aarch64_cmd=$*
 
 tmux_session()
 {
