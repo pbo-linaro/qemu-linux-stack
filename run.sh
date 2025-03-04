@@ -11,8 +11,6 @@ qemu_aarch64_cmd=$*
 
 $qemu_aarch64_cmd \
 -nographic \
--nodefaults \
--serial stdio \
 -netdev user,id=vnet \
 -device virtio-net-pci,netdev=vnet \
 -M virt,iommu=smmuv3,virtualization=on \

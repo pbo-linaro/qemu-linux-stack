@@ -9,6 +9,7 @@ Build/Run QEMU/Linux using a container.
 
 # run system using:
 ./run.sh /path/to/qemu-system-aarch64
+# exit QEMU with ctrl-a + x
 
 # debug kernel using:
 ./debug.sh /path/to/qemu-system-aarch64
