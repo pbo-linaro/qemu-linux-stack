@@ -17,6 +17,7 @@ if [ ! -d $tdisp_data ]; then
 fi
 
 ./run.sh "$@" \
+-M virt,iommu=smmuv3,virtualization=on \
 -device pcie-root-port,id=pcie.1 \
 -device tdisp-testdev,bus=pcie.1,spdm-responder=spdm.0 \
 -object spdm-responder-libspdm,id=spdm.0,\

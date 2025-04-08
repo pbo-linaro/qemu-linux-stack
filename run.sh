@@ -13,7 +13,7 @@ $qemu_aarch64_cmd \
 -nographic \
 -netdev user,id=vnet \
 -device virtio-net-pci,netdev=vnet \
--M virt,iommu=smmuv3,virtualization=on \
+-M virt \
 -cpu max \
 -m 2G \
 -kernel ./out/Image \

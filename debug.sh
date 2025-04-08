@@ -14,7 +14,7 @@ tmux_session()
     qemu_cmd="$*"
     unset TMUX
     tmux -L PATH \
-    new-session -s smmu bash -cx "set -x; $qemu_cmd || read" \; \
+    new-session -s qemu-linux bash -cx "set -x; $qemu_cmd || read" \; \
     split-window -h "./container.sh cgdb -d gdb-multiarch -ex 'set remotetimeout 99999' -ex 'set pagination off' -ex 'target remote :1234' -ex 'b start_kernel' -ex c ./out/vmlinux"
 }
 

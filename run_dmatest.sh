@@ -7,4 +7,6 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-./run.sh "$@" -device virtio-dma-test-pci,iommu_platform=on
+./run.sh "$@" \
+-M virt,iommu=smmuv3,virtualization=on \
+-device virtio-dma-test-pci,iommu_platform=on
