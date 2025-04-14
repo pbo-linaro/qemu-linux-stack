@@ -48,7 +48,11 @@ ifconfig eth0 10.0.2.15 netmask 255.255.255.0 broadcast 10.0.2.255
 route add default gw 10.0.2.2
 # we need to change tty used, to have job control
 # ttyAMA0 is the first serial console on arm systems
-busybox getty 0 ttyAMA0 -l /bin/bash -n
+if [ -f /host/init ]; then
+    /host/init
+else
+    busybox getty 0 ttyAMA0 -l /bin/bash -n
+fi
 # force shutdown
 echo o > /proc/sysrq-trigger
 sleep 10
