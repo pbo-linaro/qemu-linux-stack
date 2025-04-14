@@ -15,7 +15,7 @@ $qemu_aarch64_cmd \
 -device virtio-net-pci,netdev=vnet \
 -M virt \
 -cpu max \
--m 2G \
+-m 8G \
 -kernel ./out/Image \
 -initrd ./out/initrd.cpio \
 -append 'nokaslr' \
