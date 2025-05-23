@@ -30,9 +30,9 @@ build_initrd()
     rm -rf initrd
     mkdir initrd
     pushd initrd
-    wget https://dl-cdn.alpinelinux.org/alpine/v3.21/releases/aarch64/alpine-minirootfs-3.21.0-aarch64.tar.gz
-    tar xzf alpine-*
-    rm alpine-*
+    base=docker.io/arm64v8/debian:trixie
+    podman pull --platform linux/arm64/v8 $base
+    podman export -o /dev/stdout $(podman create $base) | tar xf -
     cat > init << EOF
 #!/bin/sh
 
@@ -51,7 +51,7 @@ route add default gw 10.0.2.2
 if [ -f /host/init ]; then
     /host/init
 else
-    busybox getty 0 ttyAMA0 -l /bin/bash -n
+    setsid -c -w /usr/bin/bash -l
 fi
 # force shutdown
 echo o > /proc/sysrq-trigger
@@ -59,9 +59,12 @@ sleep 10
 EOF
     chmod +x init
     cat > etc/resolv.conf << EOF
-nameserver 8.8.8.8
+nameserver 1.1.1.1
 EOF
-    proot -q qemu-aarch64 -r $(pwd) sh -c 'apk update && apk add bash gdb pciutils qemu-system-aarch64'
+    run="proot -q qemu-aarch64 -S $(pwd) -w /"
+    $run apt update
+    $run apt install -y bash bash-completion pciutils net-tools \
+                        iputils-ping util-linux procps htop
     find . | cpio -o -H newc > ../initrd.cpio
     popd
 }

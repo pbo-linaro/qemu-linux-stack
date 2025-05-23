@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 docker.io/debian:bookworm
+FROM --platform=linux/amd64 docker.io/debian:trixie
 
 RUN apt update && apt install -y \
 build-essential \
@@ -16,3 +16,4 @@ proot \
 qemu-user \
 gdb-multiarch \
 cgdb
+RUN apt update && apt install -y podman
