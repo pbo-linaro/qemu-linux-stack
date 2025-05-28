@@ -1,0 +1,6 @@
+FROM docker.io/arm64v8/debian:trixie
+
+RUN apt update && apt install -y \
+    bash-completion pciutils net-tools \
+    iputils-ping util-linux procps htop \
+    qemu-system-aarch64

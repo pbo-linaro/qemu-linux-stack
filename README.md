@@ -5,7 +5,7 @@ Build/Run QEMU/Linux using a container.
 
 ```
 # build system using:
-./container.sh ./build.sh
+./build.sh
 
 # run system using:
 ./run.sh /path/to/qemu-system-aarch64

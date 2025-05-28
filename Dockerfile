@@ -12,8 +12,8 @@ python3 \
 rsync \
 cpio \
 wget \
-proot \
 qemu-user \
 gdb-multiarch \
 cgdb
-RUN apt update && apt install -y podman
+RUN apt update && apt install -y \
+e2fsprogs
