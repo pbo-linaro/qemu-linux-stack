@@ -7,11 +7,6 @@ if [ -z "${DISABLE_CONTAINER_CHECK:-}" ]; then
     exit 1
 fi
 
-run_in_initrd()
-{
-    proot -q qemu-aarch64 -r $(pwd)/initrd sh -c "$*"
-}
-
 mkdir -p dmate/bin
 rsync -a linux/include/ dmate/include/
 rsync -a linux/tools/dmate/ dmate/tools/
