@@ -65,6 +65,7 @@ EOF
     $run apt update
     $run apt install -y bash bash-completion pciutils net-tools \
                         iputils-ping util-linux procps htop
+    $run apt install -y libglib2.0-dev
     find . | cpio -o -H newc > ../initrd.cpio
     popd
 }
