@@ -18,6 +18,6 @@ $qemu_aarch64_cmd \
 -m 8G \
 -kernel ./out/Image \
 -initrd ./out/initrd.cpio \
--drive format=raw,file=./out/rootfs.ext4 \
+-drive format=raw,index=0,file=./out/rootfs.ext4 \
 -append 'nokaslr' \
 -virtfs local,path=$(pwd)/,mount_tag=host,security_model=mapped,readonly=on
