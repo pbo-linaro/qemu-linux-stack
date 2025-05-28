@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 docker.io/debian:trixie
+FROM docker.io/debian:trixie
 
 RUN apt update && apt install -y \
 build-essential \

@@ -7,8 +7,7 @@ build_initrd()
     rm -rf initrd
     mkdir initrd
     pushd initrd
-    podman build --platform linux/arm64/v8 \
-        -t build-linux-stack-initrd - < ../Dockerfile_initrd
+    podman build -t build-linux-stack-initrd - < ../Dockerfile_initrd
     container=$(podman create build-linux-stack-initrd)
     podman export -o /dev/stdout $container | tar xf -
     podman rm -f $container

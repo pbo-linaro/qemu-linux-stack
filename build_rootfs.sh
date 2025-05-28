@@ -7,8 +7,7 @@ build_rootfs()
     rm -rf rootfs
     mkdir rootfs
     pushd rootfs
-    podman build --platform linux/arm64/v8 \
-        -t build-linux-stack-rootfs - < ../Dockerfile_rootfs
+    podman build -t build-linux-stack-rootfs - < ../Dockerfile_rootfs
     container=$(podman create build-linux-stack-rootfs)
     podman export -o /dev/stdout $container | tar xf -
     podman rm -f $container
