@@ -1,7 +1,8 @@
 QEMU/Linux Stack
 ================
 
-Build/Run QEMU/Linux using a container.
+Build/Run QEMU/Linux using containers.
+You need to have podman and qemu-user-binfmt installed.
 
 ```
 # build system using:
