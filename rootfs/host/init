@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+set -x
+
+export PATH=/usr/bin:/bin:/sbin
+
+mount -t devtmpfs none /dev
+mount -t proc none /proc
+mount -t sysfs none /sys
+hostname --file /hostname
+
+mkdir -p /host
+mount -t 9p -o trans=virtio host /host
+ifconfig eth0 up
+ifconfig eth0 10.0.2.15 netmask 255.255.255.0 broadcast 10.0.2.255
+route add default gw 10.0.2.2
+if [ -f /host/init ]; then
+    /host/init || true
+else
+    setsid -c -w /usr/bin/bash -l || true
+fi
+
+sync
+echo o > /proc/sysrq-trigger
+sleep 10

@@ -8,7 +8,7 @@ build_rootfs()
 {
     r=$1
     rm -f out/$r.ext4
-    podman build -t build-linux-stack-$r $r
+    podman build -t build-linux-stack-$r rootfs/$r
     container=$(podman create build-linux-stack-$r)
     podman export -o /dev/stdout $container > out/$r.tar
     ./container.sh /sbin/mke2fs -t ext4 -d out/$r.tar out/$r.ext4 10g
@@ -16,4 +16,5 @@ build_rootfs()
 }
 
 ./container.sh ./build_kernel.sh
-build_rootfs rootfs
+build_rootfs host
+build_rootfs guest
