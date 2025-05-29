@@ -16,4 +16,5 @@ qemu-user \
 gdb-multiarch \
 cgdb
 RUN apt update && apt install -y \
-e2fsprogs libarchive13t64
+e2fsprogs libarchive13t64 locales-all
+ENV LANG=en_US.UTF-8

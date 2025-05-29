@@ -4,3 +4,6 @@ RUN apt update && apt install -y \
     bash-completion pciutils net-tools \
     iputils-ping util-linux procps htop \
     qemu-system-aarch64
+RUN echo "host" > /etc/hostname
+ADD resolv.conf /etc/resolv.conf
+ADD init /init
