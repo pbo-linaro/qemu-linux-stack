@@ -12,7 +12,15 @@ hostname --file /hostname
 
 mkdir -p /host
 mount -t 9p -o trans=virtio host /host
-setsid -c -w /usr/bin/bash -l || true
+ifconfig eth0 up
+ifconfig eth0 10.0.2.15 netmask 255.255.255.0 broadcast 10.0.2.255
+route add default gw 10.0.2.2
+
+if [ $# -ge 1 ]; then
+    "$@" || true
+else
+    setsid -c -w /usr/bin/bash -l || true
+fi
 
 sync
 echo o > /proc/sysrq-trigger

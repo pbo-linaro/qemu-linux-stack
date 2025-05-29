@@ -7,9 +7,10 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-qemu_aarch64_cmd=$*
+INIT_CMD=${INIT_CMD:-}
+ROOT=${ROOT:-/dev/vda}
 
-$qemu_aarch64_cmd \
+"$@" \
 -nographic \
 -netdev user,id=vnet \
 -device virtio-net-pci,netdev=vnet \
@@ -17,6 +18,6 @@ $qemu_aarch64_cmd \
 -cpu max \
 -m 8G \
 -kernel ./out/Image \
--drive format=raw,index=0,file=./out/host.ext4 \
--append 'nokaslr root=/dev/vda rw init=/init' \
+-drive format=raw,file=./out/host.ext4 \
+-append "nokaslr root=$ROOT rw init=/init -- $INIT_CMD" \
 -virtfs local,path=$(pwd)/,mount_tag=host,security_model=mapped,readonly=off

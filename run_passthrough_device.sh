@@ -7,12 +7,13 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-cp -f ./guest_passthrough_device.sh init
 qemu-img create -f qcow2 disk 1g
 
+INIT_CMD="/host/guest_passthrough_device.sh" \
+ROOT="/dev/vdb" \
 ./run.sh "$@" \
 -machine type=virt,gic-version=max,virtualization=true,iommu=smmuv3 \
--drive if=none,id=disk,file=disk \
--device virtio-blk,drive=disk,iommu_platform=on,disable-legacy=on
+-drive if=none,format=raw,id=passthrough,file=disk \
+-device virtio-blk,drive=passthrough,iommu_platform=on,disable-legacy=on
 
-rm init disk
+rm disk

@@ -15,7 +15,7 @@ qemu-system-aarch64 \
 -enable-kvm \
 -m 2G \
 -kernel ./out/Image \
--drive format=raw,index=0,file=./out/guest.ext4 \
+-drive format=raw,file=./out/guest.ext4 \
 -append 'nokaslr root=/dev/vda rw init=/init' \
 -virtfs local,path=$(pwd)/,mount_tag=host,security_model=mapped,readonly=off \
 "$@"
