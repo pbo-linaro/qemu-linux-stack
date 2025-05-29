@@ -5,5 +5,5 @@ RUN apt update && apt install -y \
     iputils-ping util-linux procps htop
 RUN apt update && apt install -y qemu-system-aarch64
 RUN echo host > /hostname
-ADD resolv.conf /etc/resolv.conf
-ADD init /init
+COPY --from=common resolv.conf /etc/resolv.conf
+COPY --from=common init /init
