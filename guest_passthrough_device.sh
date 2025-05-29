@@ -13,6 +13,6 @@ if [ "$(cat /sys/bus/pci/devices/$disk/driver_override)" != vfio-pci ]; then
 fi
 
 qemu-system-aarch64 -m 1G -M virt -net none -display none -serial stdio \
-    -cpu max -kernel ./out/Image -initrd ./out/initrd.cpio -enable-kvm \
+    -cpu max -kernel ./out/Image -enable-kvm \
     -device vfio-pci,host=$disk \
     "$@"

@@ -17,7 +17,6 @@ $qemu_aarch64_cmd \
 -cpu max \
 -m 8G \
 -kernel ./out/Image \
--initrd ./out/initrd.cpio \
 -drive format=raw,index=0,file=./out/rootfs.ext4 \
--append 'nokaslr' \
+-append 'nokaslr root=/dev/vda rw init=/init' \
 -virtfs local,path=$(pwd)/,mount_tag=host,security_model=mapped,readonly=off

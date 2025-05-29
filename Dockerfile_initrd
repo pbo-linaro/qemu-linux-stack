@@ -1,1 +1,0 @@
-FROM --platform=linux/arm64 docker.io/arm64v8/debian:trixie

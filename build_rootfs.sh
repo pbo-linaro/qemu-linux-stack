@@ -33,6 +33,10 @@ if [ -f /host/init ]; then
 else
     setsid -c -w /usr/bin/bash -l || true
 fi
+
+sync
+echo o > /proc/sysrq-trigger
+sleep 10
 EOF
     chmod +x init
     cat > etc/resolv.conf << EOF
