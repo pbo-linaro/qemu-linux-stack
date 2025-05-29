@@ -39,8 +39,9 @@ EOF
 nameserver 1.1.1.1
 EOF
     popd
-    rm -f out/rootfs.ext4
+    rm -f out/rootfs.ext4 out/guest_rootfs.ext4
     ./container.sh /sbin/mke2fs -t ext4 -d rootfs/ out/rootfs.ext4 10g
+    cp out/rootfs.ext4 out/guest_rootfs.ext4
 }
 
 build_rootfs
