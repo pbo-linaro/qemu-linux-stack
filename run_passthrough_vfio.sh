@@ -9,7 +9,7 @@ fi
 
 qemu-img create -f qcow2 disk 1g
 
-INIT_CMD="/host/guest_passthrough_device.sh" \
+INIT_CMD=${INIT_CMD:-"/host/guest_passthrough_vfio.sh"} \
 ROOT="/dev/vdb" \
 ./run.sh "$@" \
 -machine type=virt,gic-version=max,virtualization=true,iommu=smmuv3 \
