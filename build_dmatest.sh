@@ -13,5 +13,5 @@ rsync -a linux/tools/dmate/ dmate/tools/
 for s in ./dmate/tools/*.c; do
     aarch64-linux-gnu-gcc -static $s -o dmate/bin/$(basename $s .c) \
         -I dmate/include/uapi/ -I dmate/include/ \
-        -g -Wno-cpp -Wall -Wextra
+        -g -Wno-cpp
 done

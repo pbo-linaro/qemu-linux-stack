@@ -16,5 +16,8 @@ build_rootfs()
 }
 
 ./container.sh ./build_kernel.sh
+if [ -d linux/tools/dmate ]; then
+    ./container.sh ./build_dmatest.sh
+fi
 build_rootfs host
 build_rootfs guest
