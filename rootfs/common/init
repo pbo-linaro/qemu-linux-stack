@@ -11,10 +11,17 @@ mount -t sysfs none /sys
 hostname --file /hostname
 
 mkdir -p /host
-mount -t 9p -o trans=virtio host /host
-ifconfig eth0 up
-ifconfig eth0 10.0.2.15 netmask 255.255.255.0 broadcast 10.0.2.255
-route add default gw 10.0.2.2
+if ! mount -t 9p -o trans=virtio host /host; then
+    echo 'no host share accessible, it can be added to QEMU using:'
+    echo '-virtfs local,path=$(pwd)/,mount_tag=host,security_model=mapped,readonly=off'
+fi
+if ifconfig -a | grep -q eth0; then
+    ifconfig eth0 up
+    ifconfig eth0 10.0.2.15 netmask 255.255.255.0 broadcast 10.0.2.255
+    route add default gw 10.0.2.2
+else
+    echo 'no network device'
+fi
 
 if [ $# -ge 1 ]; then
     "$@" || true
