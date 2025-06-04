@@ -7,7 +7,7 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-qemu-img create -f qcow2 disk 1g
+dd if=/dev/random of=disk bs=512 count=1
 
 INIT_CMD=${INIT_CMD:-"/host/guest_passthrough_vfio.sh"} \
 ROOT="/dev/vdb" \
