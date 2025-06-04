@@ -1,8 +1,11 @@
 QEMU/Linux Stack
 ================
 
-Build/Run QEMU/Linux using containers.
-You need to have podman and qemu-user-binfmt installed.
+Build/Run Linux under QEMU.
+Only podman and qemu-user-binfmt need to be installed.
+
+Build is based on containers to ensure it can be reproduced on any machine.
+Rootfs is derived from a container image.
 
 ```
 # build system using:
