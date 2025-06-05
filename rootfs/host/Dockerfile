@@ -8,5 +8,6 @@ RUN apt update && apt install -y \
     qemu-system-aarch64 ipxe-qemu
 RUN apt update && apt install -y strace
 RUN echo host > /hostname
+RUN mkdir /host
 COPY --from=common resolv.conf /etc/resolv.conf
 COPY --from=common init /init
