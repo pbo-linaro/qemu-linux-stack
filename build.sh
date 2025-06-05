@@ -22,3 +22,5 @@ if [ -d linux/tools/dmate ]; then
 fi
 build_rootfs host
 build_rootfs guest
+
+du -hc out/*
