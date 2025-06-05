@@ -5,14 +5,8 @@ set -x
 
 cd /host
 
-disk=0000:$(lspci | grep -i storage | cut -f 1 -d ' ' | head -n 1)
-if [ "$(cat /sys/bus/pci/devices/$disk/driver_override)" != vfio-pci ]; then
-    echo $disk > /sys/bus/pci/drivers/virtio-pci/unbind
-    echo vfio-pci > /sys/bus/pci/devices/$disk/driver_override
-    echo $disk > /sys/bus/pci/drivers/vfio-pci/bind
-fi
+source ./guest_passthrough_bind_disk.sh
 
-ROOT=/dev/vdb \
-./guest.sh \
+./guest.sh qemu-system-aarch64 \
 -device vfio-pci,host=$disk \
 "$@"

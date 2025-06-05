@@ -5,9 +5,14 @@ set -x
 
 cd /host
 
-ROOT=${ROOT:-/dev/vda}
+if [ $# -lt 1 ]; then
+    echo "usage: qemu_aarch64_cmd"
+    exit 1
+fi
 
-qemu-system-aarch64 \
+INIT_CMD=${INIT_CMD:-}
+
+"$@" \
 -netdev user,id=vnet \
 -device virtio-net-pci,netdev=vnet \
 -M virt \
@@ -18,6 +23,5 @@ qemu-system-aarch64 \
 -m 2G \
 -kernel ./out/Image \
 -drive format=raw,file=./out/guest.ext4,if=virtio \
--append "nokaslr root=$ROOT rw init=/init" \
--virtfs local,path=$(pwd)/,mount_tag=host,security_model=mapped,readonly=off \
-"$@"
+-append "nokaslr root=/dev/vda rw init=/init -- $INIT_CMD" \
+-virtfs local,path=$(pwd)/,mount_tag=host,security_model=mapped,readonly=off

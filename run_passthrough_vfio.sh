@@ -7,13 +7,12 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-dd if=/dev/random of=disk bs=512 count=1
+dd if=/dev/random of=disk bs=512 count=1 status=none
 
 INIT_CMD=${INIT_CMD:-"/host/guest_passthrough_vfio.sh"} \
-ROOT="/dev/vdb" \
 ./run.sh "$@" \
 -machine type=virt,gic-version=max,virtualization=true,iommu=smmuv3 \
--drive if=none,format=raw,id=passthrough,file=disk \
--device virtio-blk,drive=passthrough,iommu_platform=on,disable-legacy=on
+-drive file=disk,if=none,id=nvm,format=raw \
+-device nvme,serial=deadbeef,drive=nvm
 
 rm disk
