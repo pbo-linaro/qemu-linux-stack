@@ -23,7 +23,11 @@ else
 fi
 
 if [ $# -ge 1 ]; then
-    "$@" || true
+    if ! "$@"; then
+        echo "command failed: $*"
+        sync
+        echo c > /proc/sysrq-trigger
+    fi
 else
     setsid -c -w /usr/bin/bash -l || true
 fi
