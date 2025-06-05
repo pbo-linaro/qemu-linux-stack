@@ -21,6 +21,17 @@ build_linux()
 {
     pushd linux
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig -j$(nproc)
+    # nvme
+    scripts/config --enable BLK_DEV_NVME
+    # iommufd
+    # https://docs.kernel.org/driver-api/vfio.html#vfio-device-cdev
+    scripts/config --enable IOMMUFD
+    scripts/config --enable VFIO_DEVICE_CDEV
+    scripts/config --enable ARM_SMMU_V3_IOMMUFD
+    # tdisp
+    scripts/config --enable PCI_CMA
+    # dmatest
+    scripts/config --enable VIRTIO_DMATEST
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- all -j$(nproc)
     popd
 }
