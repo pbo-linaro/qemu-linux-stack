@@ -18,6 +18,6 @@ ROOT=${ROOT:-/dev/vda}
 -cpu max \
 -m 8G \
 -kernel ./out/Image \
--drive format=raw,file=./out/host.ext4 \
+-drive format=raw,file=./out/host.ext4,if=virtio \
 -append "nokaslr root=$ROOT rw init=/init -- $INIT_CMD" \
 -virtfs local,path=$(pwd)/,mount_tag=host,security_model=mapped,readonly=off
