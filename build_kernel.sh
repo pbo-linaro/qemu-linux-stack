@@ -11,7 +11,7 @@ clone_linux()
 {
     if [ ! -d linux ]; then
         git clone \
-            https://github.com/pbo-linaro/linux \
+            https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/ \
             --single-branch --branch master --depth 1 \
             linux
     fi

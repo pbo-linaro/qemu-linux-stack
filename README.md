@@ -7,6 +7,8 @@ Only podman and qemu-user-binfmt need to be installed.
 Build is based on containers to ensure it can be reproduced on any machine.
 Rootfs is derived from a container image.
 
+A custom Linux kernel can be built instead by creating a symlink named linux.
+
 ```
 # build system using:
 ./build.sh
@@ -28,3 +30,7 @@ Rootfs is derived from a container image.
 # boot a nested guest from vm with:
 /host/guest.sh qemu-system-aarch64
 ```
+
+Other scenarios may require custom kernel and QEMU:
+- kernel: https://github.com/pbo-linaro/linux
+- QEMU: https://github.com/pbo-linaro/qemu
