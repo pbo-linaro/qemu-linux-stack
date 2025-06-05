@@ -7,6 +7,6 @@ cd /host
 
 source ./guest_passthrough_bind_disk.sh
 
+INIT_CMD="$*" \
 ./guest.sh qemu-system-aarch64 \
--device vfio-pci,host=$disk \
-"$@"
+-device vfio-pci,host=$disk

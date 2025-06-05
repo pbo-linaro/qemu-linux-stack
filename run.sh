@@ -7,7 +7,7 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-INIT_CMD=${INIT_CMD:-}
+INIT_CMD="${INIT_CMD:-}"
 
 "$@" \
 -nographic \
