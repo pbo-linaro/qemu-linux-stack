@@ -24,4 +24,7 @@ Rootfs is derived from a container image.
 # to create an archive containing the whole stack:
 ./build.sh
 ./archive_artifacts.sh stack.tar.gz
+
+# boot a nested guest from vm with:
+/host/guest.sh qemu-system-aarch64
 ```
