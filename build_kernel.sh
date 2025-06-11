@@ -42,9 +42,20 @@ build_linux()
     popd
 }
 
+copy_optional()
+{
+    path=$1; shift
+    name=$(basename "$path")
+    rm -rf "out/$name"
+    if [ -e "$path" ]; then
+        rsync "$path" out/
+    fi
+}
+
 output()
 {
     mkdir -p out
+    copy_optional linux/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-test.ko
     rsync ./linux/arch/arm64/boot/Image out/
     rsync ./linux/vmlinux out/
 }
