@@ -32,6 +32,11 @@ build_linux()
     scripts/config --enable PCI_CMA
     # dmatest
     scripts/config --enable VIRTIO_DMATEST
+    # smmuv3 tests
+    scripts/config --enable KUNIT
+    scripts/config --enable ARM_SMMU_V3
+    scripts/config --enable ARM_SMMU_V3_SVA
+    scripts/config --module ARM_SMMU_V3_KUNIT_TEST
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- olddefconfig -j$(nproc)
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- all -j$(nproc)
     popd
