@@ -32,6 +32,7 @@ build_linux()
     scripts/config --enable PCI_CMA
     # dmatest
     scripts/config --enable VIRTIO_DMATEST
+    make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- olddefconfig -j$(nproc)
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- all -j$(nproc)
     popd
 }
