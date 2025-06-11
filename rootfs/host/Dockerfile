@@ -7,6 +7,7 @@ RUN apt update && apt install -y \
     --no-install-recommends \
     qemu-system-aarch64 ipxe-qemu
 RUN apt update && apt install -y strace
+RUN apt update && apt install -y kmod
 RUN echo host > /hostname
 RUN mkdir /host
 COPY --from=common resolv.conf /etc/resolv.conf
