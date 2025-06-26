@@ -9,17 +9,17 @@ fi
 
 clone_uboot()
 {
-    if [ ! -d uboot ]; then
+    if [ ! -d u-boot ]; then
         git clone \
             https://github.com/u-boot/u-boot \
             --single-branch --branch v2025.04 --depth 1 \
-            uboot
+            u-boot
     fi
 }
 
 build_uboot()
 {
-    pushd uboot
+    pushd u-boot
     rm -f .config
     make CROSS_COMPILE=aarch64-linux-gnu- qemu_arm64_defconfig
     scripts/config --set-val BOOT_DELAY 0
@@ -30,7 +30,7 @@ build_uboot()
 output()
 {
     mkdir -p out
-    rsync ./uboot/u-boot.bin out/u-boot.bin
+    rsync ./u-boot/u-boot.bin out/u-boot.bin
 }
 
 clone_uboot
