@@ -22,7 +22,7 @@ build_uboot()
     pushd u-boot
     rm -f .config
     make CROSS_COMPILE=aarch64-linux-gnu- qemu_arm64_defconfig
-    scripts/config --set-val BOOT_DELAY 0
+    scripts/config --set-val BOOTDELAY 0
     make CROSS_COMPILE=aarch64-linux-gnu- -j$(nproc)
     popd
 }
