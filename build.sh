@@ -17,6 +17,7 @@ build_rootfs()
 }
 
 ./container.sh ./build_kernel.sh
+./container.sh ./build_uboot.sh
 if [ -d linux/tools/dmate ]; then
     ./container.sh ./build_dmatest.sh
 fi

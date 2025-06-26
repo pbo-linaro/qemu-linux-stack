@@ -17,6 +17,8 @@ gdb-multiarch \
 cgdb
 RUN apt update && apt install -y \
 e2fsprogs libarchive13t64 locales-all
+RUN apt update && apt install -y \
+libgnutls28-dev
 RUN apt update && apt install -y ccache
 ENV PATH=/usr/lib/ccache:$PATH
 ENV LANG=en_US.UTF-8
