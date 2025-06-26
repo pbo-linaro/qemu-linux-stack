@@ -13,4 +13,4 @@ out=$1; shift
 # - kernel
 # - guest rootfs
 # - host rootfs
-tar czvfS $out out/Image out/host.ext4 out/guest.ext4
+tar czvfS $out out/Image.gz out/host.ext4 out/guest.ext4

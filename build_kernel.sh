@@ -56,7 +56,7 @@ output()
 {
     mkdir -p out
     copy_optional linux/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-test.ko
-    rsync ./linux/arch/arm64/boot/Image out/
+    rsync ./linux/arch/arm64/boot/Image.gz out/
     rsync ./linux/vmlinux out/
 }
 

@@ -21,7 +21,7 @@ INIT_CMD=${INIT_CMD:-}
 -cpu host \
 -enable-kvm \
 -m 2G \
--kernel ./out/Image \
+-kernel ./out/Image.gz \
 -drive format=raw,file=./out/guest.ext4,if=virtio \
 -append "nokaslr root=/dev/vda rw init=/init -- $INIT_CMD" \
 -virtfs local,path=$(pwd)/,mount_tag=host,security_model=mapped,readonly=off
