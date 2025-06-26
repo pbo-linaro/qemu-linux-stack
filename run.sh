@@ -9,6 +9,8 @@ fi
 
 INIT_CMD="${INIT_CMD:-}"
 
+set -x
+
 "$@" \
 -nographic \
 -netdev user,id=vnet \

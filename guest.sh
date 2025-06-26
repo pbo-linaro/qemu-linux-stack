@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-set -x
 
 cd /host
 
@@ -11,6 +10,8 @@ if [ $# -lt 1 ]; then
 fi
 
 INIT_CMD=${INIT_CMD:-}
+
+set -x
 
 "$@" \
 -netdev user,id=vnet \
