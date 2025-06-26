@@ -20,6 +20,7 @@ clone_linux()
 build_linux()
 {
     pushd linux
+    rm .config
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig -j$(nproc)
     # nvme
     scripts/config --enable BLK_DEV_NVME
