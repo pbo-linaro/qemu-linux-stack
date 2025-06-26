@@ -28,7 +28,7 @@ if [ $# -ge 1 ]; then
         echo c > /proc/sysrq-trigger
     fi
 else
-    setsid -c -w /usr/bin/bash -l || true
+    setsid -c /bin/bash -l || true
 fi
 
 sync
