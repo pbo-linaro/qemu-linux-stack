@@ -3,8 +3,8 @@
 set -euo pipefail
 
 if [ -z "${DISABLE_CONTAINER_CHECK:-}" ]; then
-    echo "run command using ./container.sh ./build_kernel.sh"
-    exit 1
+    ./container.sh ./build_kernel.sh
+    exit 0
 fi
 
 clone_linux()
