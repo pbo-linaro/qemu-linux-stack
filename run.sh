@@ -15,9 +15,10 @@ set -x
 -nographic \
 -netdev user,id=vnet \
 -device virtio-net-pci,netdev=vnet \
--M virt,virtualization=on \
+-M virt,secure=on,virtualization=on,gic-version=3,iommu=smmuv3 \
 -cpu max \
 -m 8G \
+-bios ./out/flash.bin \
 -kernel ./out/Image.gz \
 -drive format=raw,file=./out/host.ext4,if=virtio \
 -append "nokaslr root=/dev/vda rw init=/init -- $INIT" \

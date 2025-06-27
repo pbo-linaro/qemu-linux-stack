@@ -14,7 +14,6 @@ dd if=/dev/random of=$iommufd bs=1024 count=1 status=none
 
 INIT=${INIT:-"/host/guest_passthrough.sh /host/$vfio /host/$iommufd"} \
 ./run.sh "$@" \
--M virt,gic-version=max,virtualization=on,iommu=smmuv3 \
 -drive file=$vfio,if=none,id=vfio,format=raw \
 -device nvme,serial=vfio,drive=vfio \
 -drive file=$iommufd,if=none,id=iommufd,format=raw \
