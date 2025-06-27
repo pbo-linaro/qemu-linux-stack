@@ -29,10 +29,6 @@ build_linux()
     scripts/config --enable IOMMUFD
     scripts/config --enable VFIO_DEVICE_CDEV
     scripts/config --enable ARM_SMMU_V3_IOMMUFD
-    # tdisp
-    scripts/config --enable PCI_CMA
-    # dmatest
-    scripts/config --enable VIRTIO_DMATEST
     # 16KB pages
     # scripts/config --enable ARM64_16K_PAGES
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- olddefconfig -j$(nproc)
