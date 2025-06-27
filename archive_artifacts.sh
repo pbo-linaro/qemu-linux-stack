@@ -3,16 +3,21 @@
 set -euo pipefail
 
 if [ $# -ne 1 ]; then
-    echo "usage: out_tar_gz"
+    echo "usage: out_tar_xz"
     exit 1
 fi
 
 out=$1; shift
+
+if ! [[ "$out" =~ .*.tar.xz ]]; then
+    echo "$out should be a .tar.xz archive"
+    exit 1
+fi
 
 du -hc out/*
 # create a sparse archive with:
 # - kernel
 # - guest rootfs
 # - host rootfs
-tar czvfS $out out/
+./container.sh tar cJvfS $out out/
 du -h $out

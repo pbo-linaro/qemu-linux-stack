@@ -25,7 +25,7 @@ A custom Linux kernel can be built instead by creating a symlink named linux.
 
 # to create an archive containing the whole stack:
 ./build.sh
-./archive_artifacts.sh stack.tar.gz
+./archive_artifacts.sh stack.tar.xz
 
 # boot a nested guest from vm with:
 /host/guest.sh qemu-system-aarch64
