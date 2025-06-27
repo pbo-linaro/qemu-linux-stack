@@ -8,5 +8,5 @@ if [ $# -lt 1 ]; then
 fi
 
 ./run.sh "$@" \
--M virt,secure=on,virtualization=on \
+-M virt,secure=on,virtualization=on,gic-version=3 \
 -bios out/flash.bin
