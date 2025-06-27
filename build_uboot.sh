@@ -27,12 +27,5 @@ build_uboot()
     popd
 }
 
-output()
-{
-    mkdir -p out
-    rsync ./u-boot/u-boot.bin out/u-boot.bin
-}
-
 clone_uboot
 build_uboot
-output
