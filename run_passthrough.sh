@@ -12,7 +12,7 @@ iommufd=disk_iommufd
 dd if=/dev/random of=$vfio bs=512 count=1 status=none
 dd if=/dev/random of=$iommufd bs=1024 count=1 status=none
 
-INIT_CMD=${INIT_CMD:-"/host/guest_passthrough.sh /host/$vfio /host/$iommufd"} \
+INIT=${INIT:-"/host/guest_passthrough.sh /host/$vfio /host/$iommufd"} \
 ./run.sh "$@" \
 -M virt,gic-version=max,virtualization=on,iommu=smmuv3 \
 -drive file=$vfio,if=none,id=vfio,format=raw \

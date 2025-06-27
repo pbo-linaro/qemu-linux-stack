@@ -23,7 +23,7 @@ for p in "$pci_vfio" "$pci_iommufd"; do
     echo $p > /sys/bus/pci/drivers/vfio-pci/bind
 done
 
-INIT_CMD="bash -c \"diff /dev/nvme0n1 $image_vfio && diff /dev/nvme1n1 $image_iommufd\"" \
+INIT="bash -c \"diff /dev/nvme0n1 $image_vfio && diff /dev/nvme1n1 $image_iommufd\"" \
 ./guest.sh qemu-system-aarch64 \
 -device vfio-pci,host=$pci_vfio \
 -object iommufd,id=iommufd0 \
