@@ -19,4 +19,6 @@ build_rootfs()
 }
 
 build_rootfs host
-build_rootfs guest
+if [ -d rootfs/guest ]; then
+    build_rootfs guest
+fi
