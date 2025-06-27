@@ -9,8 +9,10 @@ fi
 
 out=$1; shift
 
+du -hc out/*
 # create a sparse archive with:
 # - kernel
 # - guest rootfs
 # - host rootfs
 tar czvfS $out out/
+du -h $out
