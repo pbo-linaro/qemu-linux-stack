@@ -11,8 +11,10 @@ build_rootfs()
     podman build -t build-linux-stack-$r \
         --build-context common=rootfs/common rootfs/$r
     container=$(podman create build-linux-stack-$r)
-    podman export -o /dev/stdout $container > out/$r.tar
-    ./container.sh /sbin/mke2fs -t ext4 -d out/$r.tar out/$r.ext4 10g
+    # export a tar, and pass it to mke2fs directly
+    podman export -o /dev/stdout $container |
+        env CONTAINER_NO_TTY= \
+        ./container.sh /sbin/mke2fs -t ext4 -d - out/$r.ext4 10g
     podman rm -f $container
 }
 
