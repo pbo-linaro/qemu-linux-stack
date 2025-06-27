@@ -2,7 +2,9 @@
 
 set -euo pipefail
 
-podman build -t build-linux-stack - < ./Dockerfile
+# build silently for 3 seconds, and restart if needed
+timeout 3 podman build -q -t build-linux-stack - < ./Dockerfile ||
+    podman build -t build-linux-stack - < ./Dockerfile
 
 tty=-t
 [ -v CONTAINER_NO_TTY ] && tty=
