@@ -26,11 +26,18 @@ A custom Linux kernel can be built instead by creating a symlink named linux.
 # to create an archive containing the whole stack:
 ./build.sh
 ./archive_artifacts.sh stack.tar.xz
-
-# boot a nested guest from vm with:
-/host/guest.sh qemu-system-aarch64
 ```
 
-Other scenarios may require custom kernel and QEMU:
-- kernel: https://github.com/pbo-linaro/linux
-- QEMU: https://github.com/pbo-linaro/qemu
+It's possible to automate execution of commands in the VM:
+
+```
+# Current working directory is mounted as /host in VM
+# A script named guest.sh can be used to launch a nested guest
+# Finally, a custom command can be passed to init script using INIT env var
+
+# To boot a nested guest, and call hostname:
+INIT='env INIT=hostname /host/guest.sh qemu-system-aarch64' ./run.sh qemu-system-aarch64
+
+# In case command fail, init will trigger a Kernel panic
+INIT='false' ./run.sh qemu-system-aarch64
+```
