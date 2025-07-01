@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
+set -x
 
 if [ -z "${DISABLE_CONTAINER_CHECK:-}" ]; then
     ./container.sh ./build_arm_trusted_firmware.sh
