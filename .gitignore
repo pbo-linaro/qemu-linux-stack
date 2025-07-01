@@ -3,3 +3,5 @@
 /dmate
 /u-boot
 /arm-trusted-firmware/
+/edk2
+/tf-rmm
