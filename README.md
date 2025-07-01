@@ -17,8 +17,9 @@ A custom Linux kernel can be built instead by creating a symlink named linux.
 ./run.sh /path/to/qemu-system-aarch64
 # exit QEMU with ctrl-a + x
 
-# debug kernel using:
+# debug kernel and firmwares using:
 ./debug.sh /path/to/qemu-system-aarch64
+# additional gdb commands were added, like arm-exception-level. See gdb.py.
 
 # to debug qemu itself:
 ./run.sh gdb --args /path/to/qemu-system-aarch64
