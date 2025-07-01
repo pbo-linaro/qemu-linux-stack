@@ -21,6 +21,8 @@ clone_tfa()
 build_tfa()
 {
     pushd arm-trusted-firmware
+    # tf-a is not very good to handle config changes, so simply clean it
+    git clean -ffdx
     make PLAT=qemu QEMU_USE_GIC_DRIVER=QEMU_GICV3 \
          BL33=../u-boot/u-boot.bin \
          DEBUG=1 \
