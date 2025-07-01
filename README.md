@@ -42,3 +42,25 @@ INIT='env INIT=hostname /host/guest.sh qemu-system-aarch64' ./run.sh qemu-system
 # In case command fail, init will trigger a Kernel panic
 INIT='false' ./run.sh qemu-system-aarch64
 ```
+
+Linux is compiled with -O2 (and relies on it), making it hard to debug.
+
+However, you can enable debugging for specific functions by using:
+
+```
+diff --git a/include/linux/compiler.h b/include/linux/compiler.h
+index 27725f1ab5ab..e76fd4da8179 100644
+--- a/include/linux/compiler.h
++++ b/include/linux/compiler.h
+@@ -4,6 +4,8 @@
+
+ #include <linux/compiler_types.h>
+
++#define DEBUGGER __attribute__((optimize("O0")))
++
+ #ifndef __ASSEMBLY__
+
+ #ifdef __KERNEL__
+```
+
+And marking functions to debug with `DEBUGGER` attribute.
