@@ -12,8 +12,8 @@ clone_linux()
 {
     if [ ! -d linux ]; then
         git clone \
-            https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/ \
-            --single-branch --branch v6.15 --depth 1 \
+            https://gitlab.arm.com/linux-arm/linux-cca \
+            --single-branch --branch cca-host/v9 --depth 1 \
             linux
     fi
 }
@@ -30,6 +30,9 @@ build_linux()
     scripts/config --enable IOMMUFD
     scripts/config --enable VFIO_DEVICE_CDEV
     scripts/config --enable ARM_SMMU_V3_IOMMUFD
+    # # Enable the configfs-tsm driver that provides the attestation interface
+    scripts/config --enable VIRT_DRIVERS
+    scripts/config --enable ARM_CCA_GUEST
     # 16KB pages
     # scripts/config --enable ARM64_16K_PAGES
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- olddefconfig -j$(nproc)
@@ -40,7 +43,7 @@ build_linux()
 output()
 {
     mkdir -p out
-    rsync ./linux/arch/arm64/boot/Image.gz out/
+    rsync ./linux/arch/arm64/boot/Image out/
 }
 
 clone_linux
