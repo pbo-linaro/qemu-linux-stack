@@ -25,6 +25,8 @@ if [ $# -ge 1 ]; then
     if ! "$@"; then
         echo "command failed: $*"
         sync
+        # sleep needed to avoid I/O error
+        sleep 0.1
         echo c > /proc/sysrq-trigger
     fi
 else
@@ -32,5 +34,7 @@ else
 fi
 
 sync
+# sleep needed to avoid I/O error
+sleep 0.1
 echo o > /proc/sysrq-trigger
 sleep 10
