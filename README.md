@@ -8,7 +8,7 @@ Build is based on containers to ensure it can be reproduced on any machine.\
 Rootfs is derived from a container image.
 
 **NOTE**: there is no ``clean`` command.\
-If you update or or switch branches, you need to run ``git clean -ffdx``.\
+If you update or switch branches, you need to run ``git clean -ffdx``.\
 Build is cached thanks to podman and ccache, ensuring quick rebuilds.
 
 ```
