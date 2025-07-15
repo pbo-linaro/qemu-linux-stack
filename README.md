@@ -7,7 +7,9 @@ Only podman and qemu-user-binfmt need to be installed.
 Build is based on containers to ensure it can be reproduced on any machine.
 Rootfs is derived from a container image.
 
-A custom Linux kernel can be built instead by creating a symlink named linux.
+Note: there is no "clean" command. In case you update or switch branches,
+it's expected to run git clean -ffdx. Build is cached thanks to podman and
+ccache, ensuring quick rebuilds.
 
 ```
 # build system using:
@@ -17,7 +19,7 @@ A custom Linux kernel can be built instead by creating a symlink named linux.
 ./run.sh /path/to/qemu-system-aarch64
 # exit QEMU with ctrl-a + x
 
-# debug kernel and firmwares using:
+# debug kernel, firmwares and bootloader using:
 ./debug.sh /path/to/qemu-system-aarch64
 # additional gdb commands were added, like arm-exception-level. See gdb.py.
 
@@ -42,6 +44,8 @@ INIT='env INIT=hostname /host/guest.sh qemu-system-aarch64' ./run.sh qemu-system
 # In case command fail, init will trigger a Kernel panic
 INIT='false' ./run.sh qemu-system-aarch64
 ```
+
+---
 
 Linux is compiled with -O2 (and relies on it), making it hard to debug.
 
