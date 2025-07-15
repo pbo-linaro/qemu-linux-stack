@@ -1,15 +1,15 @@
 QEMU/Linux Stack
 ================
 
-Build/Run Linux under QEMU.
+Build/Run Linux under QEMU.\
 Only podman and qemu-user-binfmt need to be installed.
 
-Build is based on containers to ensure it can be reproduced on any machine.
+Build is based on containers to ensure it can be reproduced on any machine.\
 Rootfs is derived from a container image.
 
-Note: there is no "clean" command. In case you update or switch branches,
-it's expected to run git clean -ffdx. Build is cached thanks to podman and
-ccache, ensuring quick rebuilds.
+**NOTE**: there is no ``clean`` command.\
+If you update or or switch branches, you need to run ``git clean -ffdx``.\
+Build is cached thanks to podman and ccache, ensuring quick rebuilds.
 
 ```
 # build system using:
