@@ -5,11 +5,13 @@ Build/Run Linux under QEMU.\
 Only ``podman`` and ``qemu-user-static (binfmt)`` need to be installed.
 
 Build is based on containers to ensure it can be reproduced on any machine.\
-Rootfs is derived from a container image.
-
-**NOTE**: there is no ``clean`` command.\
-If you update or switch branches, you need to run ``git clean -ffdx``.\
+Rootfs is derived from a container image.\
 Build is cached thanks to podman and ccache, ensuring quick rebuilds.
+
+**NOTE**: there is no ``clean`` command nor any dependency analysis.\
+Every project is cloned in its own versioned folder, and a symlink is
+dynamically set by each build script to point to the right version everytime.\
+Thus, update or switch branches should not require a ``git clean -ffdx``.
 
 ```
 # build system using:
