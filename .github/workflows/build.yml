@@ -8,10 +8,14 @@ concurrency:
 jobs:
   build_and_run_guest:
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    env:
+      GITHUB_TOKEN: ${{ secrets.WORKFLOW_RELEASE_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      - run: git config --global user.name "Name"
-      - run: git config --global user.email name@example.com
+      - run: git config --global user.name "GitHub"
+      - run: git config --global user.email git@github.com
       # build latest QEMU release
       - run: sudo sed -i -e "s/ deb$/ deb deb-src/" /etc/apt/sources.list.d/ubuntu.sources
       - run: sudo apt update && sudo apt build-dep -y qemu
@@ -22,3 +26,9 @@ jobs:
       - run: ./build.sh
       # run a nested guest and exit
       - run: INIT='env INIT=true /host/guest.sh qemu-system-aarch64' ./run.sh ./qemu/build/qemu-system-aarch64
+      # create artifacts
+      - run: echo $(basename ${{github.ref}}) > branch
+      - run: echo $(git rev-parse --short=6 HEAD) > version
+      - run: ./archive_artifacts.sh $(cat branch)-$(cat version).tar.xz
+      # push artifacts (release should be created before manually)
+      - run: gh release upload --clobber build *.tar.xz
