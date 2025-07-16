@@ -10,10 +10,13 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+      # build latest QEMU release
       - run: sudo sed -i -e "s/ deb$/ deb deb-src/" /etc/apt/sources.list.d/ubuntu.sources
       - run: sudo apt update && sudo apt build-dep -y qemu
       - run: git clone https://gitlab.com/qemu-project/qemu --branch v10.0.2 --single-branch --depth 1
       - run: cd qemu && ./configure --target-list=aarch64-softmmu && ninja -C build && cd ..
-      - run: sudo apt update && sudo apt install -y podman qemu-system qemu-user-static
+      # build stack
+      - run: sudo apt update && sudo apt install -y podman qemu-user-static
       - run: ./build.sh
+      # run a nested guest and exit
       - run: INIT='env INIT=true /host/guest.sh qemu-system-aarch64' ./run.sh ./qemu/build/qemu-system-aarch64
