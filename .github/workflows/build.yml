@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+      - run: git config --global user.name "Name"
+      - run: git config --global user.email name@example.com
       # build latest QEMU release
       - run: sudo sed -i -e "s/ deb$/ deb deb-src/" /etc/apt/sources.list.d/ubuntu.sources
       - run: sudo apt update && sudo apt build-dep -y qemu
