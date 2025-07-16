@@ -18,4 +18,8 @@ tmux_session()
     split-window -p 80 "./container.sh cgdb -d gdb-multiarch -x gdbinit"
 }
 
+if [ -z "$(which tmux)" ]; then
+    echo "debug.sh: tmux needs to be installed on your machine"
+    exit 1
+fi
 tmux_session ./run.sh $qemu_aarch64_cmd -S -s
