@@ -5,7 +5,7 @@ set -x
 
 mkdir -p out
 
-build_rootfs()
+build()
 {
     r=$1
     rm -f out/$r.ext4
@@ -22,7 +22,7 @@ build_rootfs()
     podman rm -f $container
 }
 
-build_rootfs host
+build host
 if [ -d rootfs/guest ]; then
-    build_rootfs guest
+    build guest
 fi

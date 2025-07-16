@@ -8,7 +8,7 @@ if [ -z "${DISABLE_CONTAINER_CHECK:-}" ]; then
     exit 0
 fi
 
-clone_uboot()
+clone()
 {
     url=https://github.com/u-boot/u-boot
     version=v2025.04
@@ -19,7 +19,7 @@ clone_uboot()
     rm -f u-boot && ln -sf $src u-boot
 }
 
-build_uboot()
+build()
 {
     pushd u-boot
     rm -f .config
@@ -32,5 +32,5 @@ build_uboot()
     popd
 }
 
-clone_uboot
-build_uboot
+clone
+build

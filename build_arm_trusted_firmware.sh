@@ -8,7 +8,7 @@ if [ -z "${DISABLE_CONTAINER_CHECK:-}" ]; then
     exit 0
 fi
 
-clone_tfa()
+clone()
 {
     url=https://github.com/ARM-software/arm-trusted-firmware
     version=v2.13.0
@@ -22,7 +22,7 @@ clone_tfa()
     rm -f arm-trusted-firmware && ln -s $src arm-trusted-firmware
 }
 
-build_tfa()
+build()
 {
     pushd arm-trusted-firmware
     # tf-a is not very good to handle config changes, so simply clean it
@@ -42,6 +42,6 @@ output()
     rsync ./arm-trusted-firmware/flash.bin out/flash.bin
 }
 
-clone_tfa
-build_tfa
+clone
+build
 output

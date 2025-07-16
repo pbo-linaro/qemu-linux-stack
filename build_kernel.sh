@@ -8,7 +8,7 @@ if [ -z "${DISABLE_CONTAINER_CHECK:-}" ]; then
     exit 0
 fi
 
-clone_linux()
+clone()
 {
     url=https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     version=v6.15
@@ -19,7 +19,7 @@ clone_linux()
     rm -f linux && ln -s $src linux
 }
 
-build_linux()
+build()
 {
     pushd linux
     rm -f .config
@@ -44,6 +44,6 @@ output()
     rsync ./linux/arch/arm64/boot/Image.gz out/
 }
 
-clone_linux
-build_linux
+clone
+build
 output
