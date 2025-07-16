@@ -12,7 +12,7 @@ clone()
 {
     url=https://github.com/tianocore/edk2.git
     version=edk2-stable202505
-    src=$version
+    src=$version-release
     if [ ! -d $src ]; then
         git clone $url --single-branch --branch $version --depth 1 $src
         pushd $src
@@ -27,7 +27,7 @@ build()
     pushd edk2
     make -C BaseTools -j $(nproc)
     export GCC5_AARCH64_PREFIX=aarch64-linux-gnu-
-    bash -c ". edksetup.sh && build -q -a AARCH64 -b DEBUG -t GCC5 -p ArmVirtPkg/ArmVirtQemuKernel.dsc"
+    bash -c ". edksetup.sh && build -q -a AARCH64 -b RELEASE -t GCC5 -p ArmVirtPkg/ArmVirtQemuKernel.dsc"
     popd
 }
 
