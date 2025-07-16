@@ -10,15 +10,16 @@ fi
 
 clone_tfa()
 {
-    if [ ! -d arm-trusted-firmware ]; then
-        git clone \
-            https://github.com/ARM-software/arm-trusted-firmware \
-            --single-branch --branch v2.13.0 \
-            arm-trusted-firmware
-        pushd arm-trusted-firmware
+    url=https://github.com/ARM-software/arm-trusted-firmware
+    version=v2.13.0
+    src=arm-trusted-firmware-$version-patch-tcr2-sctlr2
+    if [ ! -d $src ]; then
+        git clone $url --single-branch --branch $version --depth 1 $src
+        pushd $src
         git am ../patches/arm-trusted-firmware-support-FEAT_TCR2-and-FEAT-SCTLR2.patch
         popd
     fi
+    rm -f arm-trusted-firmware && ln -s $src arm-trusted-firmware
 }
 
 build_tfa()

@@ -10,12 +10,13 @@ fi
 
 clone_linux()
 {
-    if [ ! -d linux ]; then
-        git clone \
-            https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/ \
-            --single-branch --branch v6.15 --depth 1 \
-            linux
+    url=https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    version=v6.15
+    src=linux_$version
+    if [ ! -d $src ]; then
+        git clone $url --single-branch --branch $version --depth 1 $src
     fi
+    rm -f linux && ln -s $src linux
 }
 
 build_linux()
