@@ -30,6 +30,9 @@ jobs:
       - run: echo "----- run nested guest and exit -----"
       - run: INIT='env INIT=true /host/guest.sh qemu-system-aarch64' ./run.sh ./qemu/build/qemu-system-aarch64
 
+      - run: echo "----- test device passthrough -----"
+      - run: ./run_passthrough.sh ./qemu/build/qemu-system-aarch64
+      
       - run: echo "----- create artifacts ------"
       - run: echo $(basename ${{github.ref}}) > branch
       - run: echo $(git rev-parse --short=7 HEAD) > version
