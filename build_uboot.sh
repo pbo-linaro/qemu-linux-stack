@@ -10,13 +10,14 @@ fi
 
 clone()
 {
+    rm -f u-boot
     url=https://github.com/u-boot/u-boot
     version=v2025.04
     src=u-boot-$version
     if [ ! -d $src ]; then
         git clone $url --single-branch --branch $version --depth 1 $src
     fi
-    rm -f u-boot && ln -sf $src u-boot
+    ln -s $src u-boot
 }
 
 build()

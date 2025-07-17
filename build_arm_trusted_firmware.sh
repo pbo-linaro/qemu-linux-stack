@@ -10,6 +10,7 @@ fi
 
 clone()
 {
+    rm -f arm-trusted-firmware
     url=https://github.com/ARM-software/arm-trusted-firmware
     version=v2.13.0
     src=arm-trusted-firmware-$version-patch-tcr2-sctlr2
@@ -19,7 +20,7 @@ clone()
         git am ../patches/arm-trusted-firmware-support-FEAT_TCR2-and-FEAT-SCTLR2.patch
         popd
     fi
-    rm -f arm-trusted-firmware && ln -s $src arm-trusted-firmware
+    ln -s $src arm-trusted-firmware
 }
 
 build()
