@@ -16,19 +16,27 @@ jobs:
       - uses: actions/checkout@v4
       - run: git config --global user.name "GitHub"
       - run: git config --global user.email git@github.com
-      # build latest QEMU release
+
+      - run: echo "----- build latest QEMU -----"
       - run: sudo sed -i -e "s/ deb$/ deb deb-src/" /etc/apt/sources.list.d/ubuntu.sources
       - run: sudo apt update && sudo apt build-dep -y qemu
       - run: git clone https://gitlab.com/qemu-project/qemu --branch v10.0.2 --single-branch --depth 1
       - run: cd qemu && ./configure --target-list=aarch64-softmmu && ninja -C build && cd ..
-      # build stack
+
+      - run: echo "----- build stack -----"
       - run: sudo apt update && sudo apt install -y podman qemu-user-static
       - run: ./build.sh
-      # run a nested guest and exit
+
+      - run: echo "----- run nested guest and exit -----"
       - run: INIT='env INIT=true /host/guest.sh qemu-system-aarch64' ./run.sh ./qemu/build/qemu-system-aarch64
-      # create artifacts
+
+      - run: echo "----- create artifacts ------"
       - run: echo $(basename ${{github.ref}}) > branch
       - run: echo $(git rev-parse --short=6 HEAD) > version
       - run: ./archive_artifacts.sh $(cat branch)-$(cat version).tar.xz
-      # push artifacts (release should be created before manually)
-      - run: gh release upload --clobber build *.tar.xz
+
+      - run: echo "----- tag build -----"
+      - run: git tag $(cat branch)-$(cat version) && git push --tags
+
+      - run: echo "----- push artifacts to "build" release -----"
+      - run: gh release upload --clobber build $(cat branch)-$(cat version).tar.xz
