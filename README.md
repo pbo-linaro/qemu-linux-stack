@@ -8,6 +8,11 @@ Build is based on containers to ensure it can be reproduced on any machine.\
 Rootfs is derived from a container image.\
 Build is cached thanks to ``podman`` and ``ccache``, ensuring quick rebuilds.
 
+All revisions are
+[automatically](https://github.com/pbo-linaro/qemu-linux-stack/blob/master/.github/workflows/build.yml)
+tagged, built and added to
+[build release](https://github.com/pbo-linaro/qemu-linux-stack/releases/tag/build).
+
 **NOTE**: there is no ``clean`` command nor any dependency analysis.\
 Every project is cloned in its own versioned folder, and a symlink is
 dynamically set by each build script to point to the right version everytime.
