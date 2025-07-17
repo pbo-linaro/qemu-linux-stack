@@ -31,8 +31,7 @@ build()
     scripts/config --enable IOMMUFD
     scripts/config --enable VFIO_DEVICE_CDEV
     scripts/config --enable ARM_SMMU_V3_IOMMUFD
-    # 16KB pages
-    # scripts/config --enable ARM64_16K_PAGES
+
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- olddefconfig -j$(nproc)
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- all -j$(nproc)
     popd
