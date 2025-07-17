@@ -32,7 +32,7 @@ jobs:
 
       - run: echo "----- create artifacts ------"
       - run: echo $(basename ${{github.ref}}) > branch
-      - run: echo $(git rev-parse --short=6 HEAD) > version
+      - run: echo $(git rev-parse --short=7 HEAD) > version
       - run: ./archive_artifacts.sh $(cat branch)-$(cat version).tar.xz
 
       - run: echo "----- tag build -----"
