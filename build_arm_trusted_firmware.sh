@@ -31,7 +31,6 @@ build()
     make PLAT=qemu QEMU_USE_GIC_DRIVER=QEMU_GICV3 \
          BL33=../u-boot/u-boot.bin \
          LOG_LEVEL=40 \
-         CFLAGS='-g -ggdb3' \
          DEBUG=1 \
          all fip -j$(nproc)
     dd if=build/qemu/debug/bl1.bin of=flash.bin bs=4096 conv=notrunc
