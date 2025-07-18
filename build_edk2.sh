@@ -13,7 +13,7 @@ clone()
     rm -f edk2
     url=https://github.com/tianocore/edk2.git
     version=edk2-stable202505
-    src=$version-sbsa
+    src=$version-sbsa-release
     if [ ! -d $src ]; then
         git clone $url --single-branch --branch $version --depth 1 $src
         pushd $src
@@ -42,27 +42,27 @@ build()
     export PACKAGES_PATH=$(pwd):$(pwd)/edk2-platforms
     # copy bin from TF-A
     mkdir -p Platform/Qemu/Sbsa/
-    cp -f ../arm-trusted-firmware/build/qemu_sbsa/debug/*.bin Platform/Qemu/Sbsa/
+    cp -f ../arm-trusted-firmware/build/qemu_sbsa/release/*.bin Platform/Qemu/Sbsa/
 
     make -C BaseTools -j $(nproc)
     export GCC5_AARCH64_PREFIX=aarch64-linux-gnu-
     # Set options to boot by default in EFI shell
     bash -c ". edksetup.sh &&
-    build -q -n $(nproc) -a AARCH64 -b DEBUG -t GCC5 \
+    build -q -n $(nproc) -a AARCH64 -b RELEASE -t GCC5 \
     -D ENABLE_RME \
     -p edk2-platforms/Platform/Qemu/SbsaQemu/SbsaQemu.dsc \
     --pcd PcdUefiShellDefaultBootEnable=1 \
     --pcd PcdShellDefaultDelay=0 \
     --pcd PcdPlatformBootTimeOut=0"
 
-    truncate truncate -s 256M Build/SbsaQemuRme/DEBUG_GCC5/FV/SBSA_FLASH*.fd
+    truncate truncate -s 256M Build/SbsaQemuRme/RELEASE_GCC5/FV/SBSA_FLASH*.fd
     popd
 }
 
 output()
 {
     mkdir -p out
-    rsync ./edk2/Build/SbsaQemuRme/DEBUG_GCC5/FV/SBSA_FLASH* out/
+    rsync ./edk2/Build/SbsaQemuRme/RELEASE_GCC5/FV/SBSA_FLASH* out/
 }
 
 clone
