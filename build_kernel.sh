@@ -33,6 +33,9 @@ build()
     scripts/config --enable VFIO_DEVICE_CDEV
     scripts/config --enable ARM_SMMU_V3_IOMMUFD
 
+    # disable all modules
+    sed -i -e 's/=m$/=n/' .config
+
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- olddefconfig -j$(nproc)
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- all -j$(nproc)
     popd
