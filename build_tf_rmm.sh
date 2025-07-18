@@ -13,7 +13,7 @@ clone()
     rm -f tf-rmm
     url=https://github.com/TF-RMM/tf-rmm
     version=481cb7f4
-    src=tf-rmm-main-s1pie-sbsa
+    src=tf-rmm-main-s1pie-sbsa-release
     if [ ! -d $src ]; then
         git clone $url $src
         pushd $src
@@ -30,7 +30,7 @@ build()
     pushd tf-rmm
     env CROSS_COMPILE=aarch64-linux-gnu- \
       cmake -DRMM_CONFIG=qemu_sbsa_defcfg \
-      -DCMAKE_BUILD_TYPE=Debug \
+      -DCMAKE_BUILD_TYPE=Release \
       -DLOG_LEVEL=40 \
       -S . -B build
     intercept-build --append \
