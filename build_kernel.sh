@@ -34,7 +34,7 @@ build()
     scripts/config --enable ARM_SMMU_V3_IOMMUFD
 
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- olddefconfig -j$(nproc)
-    make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- all -j$(nproc)
+    make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- all debug-flags-y='-g -ggdb3' -j$(nproc)
     popd
 }
 
