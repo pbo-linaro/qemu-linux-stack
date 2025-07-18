@@ -7,6 +7,13 @@ export PATH=/usr/bin:/bin:/sbin
 
 mount -t proc none /proc
 mount -t sysfs none /sys
+mkdir /dev/pts
+mount devpts /dev/pts -t devpts
+ln -s /proc/self/fd /dev/fd
+ln -s /proc/self/fd/0 /dev/stdin
+ln -s /proc/self/fd/1 /dev/stdout
+ln -s /proc/self/fd/2 /dev/stderr
+
 hostname -F /hostname
 
 if ! mount -t 9p -o trans=virtio host /host; then
