@@ -10,10 +10,10 @@ fi
 
 clone()
 {
-    rm -f arm-trusted-firmware
+    rm -f arm-trusted-firmware-release
     url=https://github.com/ARM-software/arm-trusted-firmware
     version=v2.13.0
-    src=arm-trusted-firmware-$version-patch-tcr2-sctlr2-sbsa
+    src=arm-trusted-firmware-$version-patch-tcr2-sctlr2-sbsa-release
     if [ ! -d $src ]; then
         git clone $url --single-branch --branch $version --depth 1 $src
         pushd $src
@@ -32,8 +32,7 @@ build()
     # https://trustedfirmware-a.readthedocs.io/en/latest/components/realm-management-extension.html#building-and-running-tf-a-with-rme
     make PLAT=qemu_sbsa \
          ENABLE_RME=1 \
-         RMM=../tf-rmm/build/Debug/rmm.img \
-         DEBUG=1 \
+         RMM=../tf-rmm/build/Release/rmm.img \
          all fip -j$(nproc)
     popd
 }
