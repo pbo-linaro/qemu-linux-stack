@@ -41,6 +41,16 @@ build()
 
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- olddefconfig -j$(nproc)
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- all -j$(nproc)
+
+    # compile commands
+    ./scripts/clang-tools/gen_compile_commands.py
+    sed -i ./compile_commands.json \
+        -e 's/-femit-struct-debug-baseonly//' \
+        -e 's/-fconserve-stack//' \
+        -e 's/-fno-allow-store-data-races//' \
+        -e 's/-mabi=lp64//' \
+        -e 's/aarch64-linux-gnu-gcc/clang -target aarch64-pc-none-gnu -Wno-unknown-warning-option -enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang/'
+
     popd
 }
 
