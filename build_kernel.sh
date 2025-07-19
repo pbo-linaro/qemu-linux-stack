@@ -16,6 +16,9 @@ clone()
     src=linux_$version
     if [ ! -d $src ]; then
         git clone $url --single-branch --branch $version --depth 1 $src
+        pushd $src
+        git am ../patches/linux-include-linux-compiler-add-DEBUGGER-attribute-for-functions.patch
+        popd
     fi
     ln -s $src linux
 }
