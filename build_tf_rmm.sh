@@ -11,11 +11,11 @@ fi
 clone()
 {
     rm -f tf-rmm
-    url=https://github.com/TF-RMM/tf-rmm
-    version=481cb7f4
-    src=tf-rmm-main-s1pie-sbsa
+    url=https://review.trustedfirmware.org/TF-RMM/tf-rmm.git
+    version=topics/da_alp12
+    src=tf-rmm-$(echo "$version" | tr '/' '_')-version-support-lower-pmu-versions-sbsa-device-assignment
     if [ ! -d $src ]; then
-        git clone $url $src
+        git clone $url --single-branch --branch $version --depth 1 $src
         pushd $src
         git checkout $version
         git submodule update --init --depth 1
@@ -32,6 +32,7 @@ build()
       cmake -DRMM_CONFIG=qemu_sbsa_defcfg \
       -DCMAKE_BUILD_TYPE=Debug \
       -DLOG_LEVEL=40 \
+      -DRMM_V1_1=ON \
       -S . -B build
     intercept-build --append \
     make -C build -j "$(nproc)"
