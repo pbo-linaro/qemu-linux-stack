@@ -12,10 +12,14 @@ clone()
 {
     rm -f kvmtool
     url=https://gitlab.arm.com/linux-arm/kvmtool-cca
-    version=cca/v7
-    src=kvmtool_$(echo $version | tr '/' '_')
+    version=cca-1.1/da/proto/rmm-1.1-alp12/v1
+    src=kvmtool_$(echo $version | tr '/' '_')-device-assignment
     if [ ! -d $src ]; then
         git clone $url --single-branch --branch $version --depth 1 $src
+        pushd $src
+        # https://git.codelinaro.org/linaro/dcap/kvmtool/-/commits/alp12
+        git am ../patches/kvmtool-irq-Avoid-concurrent-access-from-virtio-and-vfio-sub.patch
+        popd
     fi
     ln -s $src kvmtool
 }
