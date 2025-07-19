@@ -11,9 +11,9 @@ fi
 clone()
 {
     rm -f linux
-    url=https://gitlab.arm.com/linux-arm/linux-cca
-    version=cca-host/v9
-    src=linux_$(echo $version | tr '/' '_')
+    url=https://git.codelinaro.org/linaro/dcap/linux
+    version=alp12
+    src=linux_$(echo $version | tr '/' '_')-device-assignment
     if [ ! -d $src ]; then
         git clone $url --single-branch --branch $version --depth 1 $src
         pushd $src
@@ -38,6 +38,9 @@ build()
     # # Enable the configfs-tsm driver that provides the attestation interface
     scripts/config --enable VIRT_DRIVERS
     scripts/config --enable ARM_CCA_GUEST
+    # enable host cca
+    scripts/config --enable ARM_CCA_HOST
+    scripts/config --enable PCI_TSM
 
     # disable all modules
     sed -i -e 's/=m$/=n/' .config
