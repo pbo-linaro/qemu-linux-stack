@@ -1,0 +1,25 @@
+From b1198c5b1252a123418433b0dce59f468664eb5b Mon Sep 17 00:00:00 2001
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Date: Sat, 19 Jul 2025 10:42:43 -0700
+Subject: [PATCH] include/linux/compiler: add DEBUGGER attribute for functions
+
+---
+ include/linux/compiler.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/include/linux/compiler.h b/include/linux/compiler.h
+index 27725f1ab..e76fd4da8 100644
+--- a/include/linux/compiler.h
++++ b/include/linux/compiler.h
+@@ -4,6 +4,8 @@
+ 
+ #include <linux/compiler_types.h>
+ 
++#define DEBUGGER __attribute__((optimize("O0")))
++
+ #ifndef __ASSEMBLY__
+ 
+ #ifdef __KERNEL__
+-- 
+2.47.2
+

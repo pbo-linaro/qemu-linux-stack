@@ -28,4 +28,6 @@ b DxeMain
 add-symbol-file ./linux/vmlinux
 b start_kernel
 
+disable
+b start_kernel
 c

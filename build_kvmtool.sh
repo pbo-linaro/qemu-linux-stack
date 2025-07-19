@@ -11,9 +11,9 @@ fi
 clone()
 {
     rm -f kvmtool
-    url=https://gitlab.arm.com/linux-arm/kvmtool-cca
-    version=cca/v7
-    src=kvmtool_$(echo $version | tr '/' '_')
+    url=https://git.codelinaro.org/linaro/dcap/kvmtool
+    version=alp12
+    src=kvmtool_$(echo $version | tr '/' '_')-device-assignment
     if [ ! -d $src ]; then
         git clone $url --single-branch --branch $version --depth 1 $src
     fi
