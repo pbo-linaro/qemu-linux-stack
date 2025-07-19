@@ -9,9 +9,9 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-INIT=${INIT:-}
-
 set -x
+
+[ -v INIT ] || INIT=
 
 "$@" \
 -netdev user,id=vnet \
