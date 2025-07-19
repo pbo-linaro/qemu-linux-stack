@@ -21,6 +21,8 @@ e2fsprogs libarchive13t64 locales-all
 RUN apt update && apt install -y \
 libgnutls28-dev
 RUN apt update && apt install -y ccache
+RUN apt update && apt install -y clang-tools
+RUN ln -s /usr/bin/intercept-build-* /usr/bin/intercept-build
 
 # wrap compilers to call ccache, keep frame pointer, and enable debug info
 RUN mkdir /opt/compiler_wrappers && \

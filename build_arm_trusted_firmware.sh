@@ -28,6 +28,7 @@ build()
     pushd arm-trusted-firmware
     # tf-a is not very good to handle config changes, so simply clean it
     git clean -ffdx
+    intercept-build --append \
     make PLAT=qemu QEMU_USE_GIC_DRIVER=QEMU_GICV3 \
          BL33=../u-boot/u-boot.bin \
          LOG_LEVEL=40 \
@@ -35,6 +36,7 @@ build()
          all fip -j$(nproc)
     dd if=build/qemu/debug/bl1.bin of=flash.bin bs=4096 conv=notrunc
     dd if=build/qemu/debug/fip.bin of=flash.bin seek=64 bs=4096 conv=notrunc
+    sed -i compile_commands.json -e 's/"cc"/"aarch64-linux-gnu-gcc"/'
     popd
 }
 

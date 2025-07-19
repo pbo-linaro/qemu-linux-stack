@@ -27,9 +27,11 @@ build()
     make CROSS_COMPILE=aarch64-linux-gnu- qemu_arm64_defconfig
     scripts/config --set-val BOOTDELAY 1
     scripts/config --enable CC_OPTIMIZE_FOR_DEBUG
+    intercept-build --append \
     make CROSS_COMPILE=aarch64-linux-gnu- -j$(nproc)
     # duplicate elf to load it twice with gdb
     cp u-boot u-boot.relocated
+    sed -i compile_commands.json -e 's/"cc"/"aarch64-linux-gnu-gcc"/'
     popd
 }
 
