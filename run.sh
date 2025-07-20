@@ -16,8 +16,8 @@ fs0:
 Image nokaslr root=/dev/vda rw init=/init -- $INIT
 EOF
 
-(./container.sh bash -c "cd ./spdm-emu/build/bin/ &&
-    ./spdm_responder_emu --trans PCI_DOE --slot_count 1")&
+# Need to cd to spdm_responder_emu folder so it can access keys
+(cd out/spdm/ && ./spdm_responder_emu --trans PCI_DOE --slot_count 1)&
 spdm_pid=$!
 kill_spdm_emu()
 {
@@ -49,6 +49,9 @@ dd if=/dev/urandom of=out/disk bs=2M count=1
 -drive id=disk,file=out/disk,if=none \
 -device ahci,id=ahci,spdm_port=2323,bus=root_port \
 -device ide-hd,drive=disk,bus=ahci.0 \
+-d unimp \
+-d guest_errors \
+-d invalid_mem
 
 rm -rf out/EFI
 rm -f out/disk

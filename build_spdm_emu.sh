@@ -38,5 +38,16 @@ build()
     popd
 }
 
+output()
+{
+    mkdir -p out
+    rm -rf out/spdm
+    rsync -a ./spdm-emu/build/bin/spdm_responder_emu \
+             ./spdm-emu/build/bin/ecp* \
+             ./spdm-emu/build/bin/rsa* \
+             out/spdm/
+}
+
 clone
 build
+output
