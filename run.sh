@@ -19,6 +19,7 @@ set -x
 -device virtio-net-pci,netdev=vnet \
 -M virt,secure=on,virtualization=on,gic-version=3,iommu=smmuv3 \
 -cpu max \
+-smp 1 \
 -m 8G \
 -bios ./out/flash.bin \
 -kernel ./out/Image.gz \
