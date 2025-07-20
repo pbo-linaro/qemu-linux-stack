@@ -4,6 +4,8 @@ set -euo pipefail
 
 rm -rf out
 
+./container.sh ccache -M 50GB
+
 ./build_kernel.sh
 echo '-------------------------------------------------------------------------'
 ./build_uboot.sh
