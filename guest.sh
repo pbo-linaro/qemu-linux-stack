@@ -5,6 +5,10 @@ set -x
 
 [ -v INIT ] || INIT=
 
+echo "ERROR: Need update guest.sh for tsm connect + lkvm"
+echo "(see cover letter in commit description)"
+exit 1
+
 lspci -vvv
 
 # find device to connect
