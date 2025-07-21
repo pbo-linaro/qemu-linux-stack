@@ -28,6 +28,9 @@ build()
     pushd linux
     rm -f .config
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig -j$(nproc)
+    # reduce number of timer interrupts
+    scripts/config --disable CONFIG_HZ_250
+    scripts/config --enable CONFIG_HZ_100
     # nvme
     scripts/config --enable BLK_DEV_NVME
     # iommufd
