@@ -28,15 +28,15 @@ Thus, update or switch branches should not require any ``git clean -ffdx``.
 ./build.sh
 
 # run system using:
-./run.sh /path/to/qemu-system-aarch64
+./run.sh /path/to/qemu-system-x86_64
 # exit QEMU with ctrl-a + x
 
 # debug kernel, firmwares and bootloader using:
-./debug.sh /path/to/qemu-system-aarch64
-# additional gdb commands were added, like arm-exception-level. See gdb.py.
+./debug.sh /path/to/qemu-system-x86_64
+# additional gdb commands were added, like x64-privilege-level. See gdb.py.
 
 # to debug qemu itself:
-./run.sh gdb --args /path/to/qemu-system-aarch64
+./run.sh gdb --args /path/to/qemu-system-x86_64
 
 # to create an archive containing the whole stack:
 ./build.sh
@@ -50,11 +50,11 @@ It's possible to automate execution of commands in the VM:
 # A script named guest.sh can be used to launch a nested guest
 # Finally, a custom command can be passed to init script using INIT env var
 
-# To boot a nested guest, and call hostname:
-INIT='env INIT=hostname /host/guest.sh qemu-system-aarch64' ./run.sh qemu-system-aarch64
+# To boot a guest, and call hostname:
+INIT=hostname ./run.sh qemu-system-x86_64
 
 # In case command fail, init will trigger a Kernel panic
-INIT='false' ./run.sh qemu-system-aarch64
+INIT='false' ./run.sh qemu-system-x86_64
 ```
 
 ---
