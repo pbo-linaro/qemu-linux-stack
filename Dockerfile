@@ -25,6 +25,8 @@ RUN apt update && apt install -y clang-tools
 RUN ln -s /usr/bin/intercept-build-* /usr/bin/intercept-build
 RUN apt update && apt install -y \
 libelf-dev
+RUN apt update && \
+apt install -y uuid-dev python-is-python3 nasm acpica-tools
 
 # wrap compilers to call ccache, keep frame pointer, and enable debug info
 RUN mkdir /opt/compiler_wrappers && \

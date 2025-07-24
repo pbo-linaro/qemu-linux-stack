@@ -20,6 +20,7 @@ set -x
 -cpu max \
 -smp 1 \
 -m 8G \
+-bios ./out/OVMF.fd \
 -kernel ./out/bzImage \
 -drive format=raw,file=./out/host.ext4,if=virtio \
 -append "nokaslr console=ttyS0 root=/dev/vda rw init=/init -- $INIT" \
