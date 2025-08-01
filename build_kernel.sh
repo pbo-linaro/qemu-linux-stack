@@ -12,7 +12,7 @@ clone()
 {
     rm -f linux
     url=https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-    version=v6.15
+    version=v6.16
     src=linux_$version
     if [ ! -d $src ]; then
         git clone $url --single-branch --branch $version --depth 1 $src
