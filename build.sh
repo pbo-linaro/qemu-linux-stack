@@ -4,12 +4,12 @@ set -euo pipefail
 
 rm -rf out
 
-if ! podman run -it --rm docker.io/debian:trixie echo; then
+if ! podman run -it --rm docker.io/debian:trixie true; then
     echo "error: podman must be installed on your machine"
     exit 1
 fi
 
-if ! podman run -it --rm docker.io/arm64v8/debian:trixie echo; then
+if ! podman run -it --rm --platform linux/arm64 docker.io/arm64v8/debian:trixie true; then
     echo "error: qemu-user-static must be installed on your machine"
     exit 1
 fi
