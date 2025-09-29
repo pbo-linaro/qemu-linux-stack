@@ -15,7 +15,7 @@ tmux_session()
     unset TMUX
     tmux -L PATH \
     new-session -s qemu-linux bash -cx "set -x; $qemu_cmd || read" \; \
-    split-window -p 80 "./container.sh cgdb -d gdb-multiarch -x gdbinit"
+    split-window -h "./container.sh cgdb -d gdb-multiarch -x gdbinit"
 }
 
 if [ -z "$(which tmux)" ]; then
