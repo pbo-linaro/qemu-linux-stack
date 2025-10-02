@@ -13,11 +13,12 @@ clone()
     rm -f arm-trusted-firmware
     url=https://github.com/ARM-software/arm-trusted-firmware
     version=v2.13.0
-    src=arm-trusted-firmware-$version-patch-tcr2-sctlr2
+    src=arm-trusted-firmware-$version-patch-tcr2-sctlr2-pie-gcs
     if [ ! -d $src ]; then
         git clone $url --single-branch --branch $version --depth 1 $src
         pushd $src
         git am ../patches/arm-trusted-firmware-support-FEAT_TCR2-and-FEAT-SCTLR2.patch
+        git am ../patches/arm-trusted-firmware-support-PIE-GCS.patch
         popd
     fi
     ln -s $src arm-trusted-firmware
