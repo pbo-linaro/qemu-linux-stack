@@ -49,6 +49,7 @@ dd if=/dev/urandom of=out/disk bs=2M count=1
 -drive id=disk,file=out/disk,if=none \
 -device ahci,id=ahci,spdm_port=2323,bus=root_port \
 -device ide-hd,drive=disk,bus=ahci.0 \
+--trace 'smmuv3*'
 
 rm -rf out/EFI
 rm -f out/disk
