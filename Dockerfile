@@ -24,6 +24,14 @@ RUN apt update && apt install -y ccache
 RUN apt update && apt install -y clang-tools
 RUN ln -s /usr/bin/intercept-build-* /usr/bin/intercept-build
 
+# Need recent pyelftools that has fix for parsing some ELF sections
+RUN cd /tmp && git clone https://github.com/eliben/pyelftools/ && \
+cd pyelftools && git checkout 638ef24ecd && \
+cd .. && mkdir -p /opt/ && mv pyelftools /opt/
+ENV PYTHONPATH=/opt/pyelftools
+
+RUN apt update && apt install -y uftrace
+
 # wrap compilers to call ccache, keep frame pointer, and enable debug info
 RUN mkdir /opt/compiler_wrappers && \
     for c in gcc g++ aarch64-linux-gnu-gcc aarch64-linux-gnu-g++; do \

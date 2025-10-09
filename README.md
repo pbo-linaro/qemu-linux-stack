@@ -57,6 +57,27 @@ INIT='env INIT=hostname /host/guest.sh qemu-system-aarch64' ./run.sh qemu-system
 INIT='false' ./run.sh qemu-system-aarch64
 ```
 
+Finally, you can generate a [perfetto](https://perfetto.dev/) trace, based on
+QEMU [uftrace plugin](https://www.qemu.org/docs/master/about/emulation.html#uftrace).
+In this case, you need to use a QEMU compiled from source and master branch.
+
+```
+# generate a trace with timestamped execution
+./trace.sh /path/to/built/qemu-system-aarch64
+...
+1760047503.162041 NOTICE:  Booting Trusted Firmware
+1760047503.162544 NOTICE:  BL1: v2.13.0(debug):v2.13.0-2-gbaeb81f
+1760047503.162725 NOTICE:  BL1: Built : 16:35:42, Oct  7 2025
+1760047503.163462 INFO:    BL1: RAM 0xe0ee000 - 0xe0f6000
+...
+execution log is available in ./uftrace.data/exec.log
+
+# generate perfetto trace using uftrace
+from=1760047503.162041
+to=1760047503.163462
+./perfetto.sh $from $to ~/out.json
+```
+
 ---
 
 Linux is compiled with -O2 (and relies on it), making it hard to debug.
