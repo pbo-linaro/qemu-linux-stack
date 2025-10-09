@@ -24,6 +24,13 @@ RUN apt update && apt install -y ccache
 RUN apt update && apt install -y clang-tools
 RUN ln -s /usr/bin/intercept-build-* /usr/bin/intercept-build
 
+# Need recent uftrace, which implements dump --srcline (81fe3b94782)
+# uftrace v0.19 will contain the needed changes.
+RUN apt update && apt install -y pigz
+RUN cd /tmp && git clone https://github.com/namhyung/uftrace && \
+cd uftrace && git checkout 81fe3b94782 && \
+./configure && make -j $(nproc) && make install && rm -rf /tmp/*
+
 # wrap compilers to call ccache, keep frame pointer, and enable debug info
 RUN mkdir /opt/compiler_wrappers && \
     for c in gcc g++ aarch64-linux-gnu-gcc aarch64-linux-gnu-g++; do \
