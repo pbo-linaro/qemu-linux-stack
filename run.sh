@@ -13,7 +13,7 @@ mkdir -p out/EFI
 cp -f out/Image ./out/EFI/Image
 cat > ./out/EFI/startup.nsh << EOF
 fs0:
-Image nokaslr root=/dev/vda rw init=/init -- $INIT
+Image nokaslr root=/dev/vda rw init=/init pcie_acs_override=downstream,multifunction -- $INIT
 EOF
 
 (./container.sh bash -c "cd ./spdm-emu/build/bin/ &&
