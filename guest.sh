@@ -32,12 +32,16 @@ lspci -vvv
 
 echo "unbind device"
 echo 0000:00:00.0 > /sys/bus/pci/devices/0000:00:00.0/driver/unbind
+sleep 2
 echo "lock device"
 echo tsm0 > /sys/bus/pci/devices/0000:00:00.0/tsm/lock
+sleep 2
 echo "set TDISP run state"
 echo 1 > /sys/bus/pci/devices/0000:00:00.0/tsm/accept
+sleep 2
 echo "load driver"
 echo 0000:00:00.0 > /sys/bus/pci/drivers_probe
+sleep 10
 EOF
 chmod +x guest/da_connect.sh
 umount guest
