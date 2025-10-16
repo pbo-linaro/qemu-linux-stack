@@ -33,7 +33,7 @@ dd if=/dev/urandom of=out/disk bs=2M count=1
 "$@" \
 -nodefaults \
 -display none \
--serial mon:stdio \
+-serial stdio \
 -netdev user,id=vnet \
 -device virtio-net-pci,netdev=vnet \
 -M sbsa-ref \
