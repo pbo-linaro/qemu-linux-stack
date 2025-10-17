@@ -27,7 +27,7 @@ clone()
 
 build()
 {
-    pushd linux
+    pushd $(readlink -f linux)
     rm -f .config
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig -j$(nproc)
     # reduce number of timer interrupts

@@ -24,7 +24,7 @@ clone()
 
 build()
 {
-    pushd u-boot
+    pushd $(readlink -f u-boot)
     rm -f .config
     make CROSS_COMPILE=aarch64-linux-gnu- qemu_arm64_defconfig
     scripts/config --set-val BOOTDELAY 1

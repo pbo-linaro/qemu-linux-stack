@@ -28,7 +28,7 @@ clone()
 
 build()
 {
-    pushd arm-trusted-firmware
+    pushd $(readlink -f arm-trusted-firmware)
     # tf-a is not very good to handle config changes, so simply clean it
     git clean -ffdx
     intercept-build --append \
