@@ -33,7 +33,7 @@ dd if=/dev/urandom of=out/disk bs=2M count=1
 "$@" \
 -nodefaults \
 -display none \
--serial stdio \
+-serial mon:stdio \
 -netdev user,id=vnet \
 -device virtio-net-pci,netdev=vnet \
 -M sbsa-ref \
@@ -51,7 +51,8 @@ dd if=/dev/urandom of=out/disk bs=2M count=1
 -device ide-hd,drive=disk,bus=ahci.0 \
 -d unimp \
 -d guest_errors \
---trace 'smmuv3*'
+
+#--trace 'smmuv3*'
 
 rm -rf out/EFI
 rm -f out/disk

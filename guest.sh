@@ -61,6 +61,8 @@ cd /host
 ./out/lkvm run \
     --realm \
     -m 256 \
+    --loglevel=debug \
+    --debug-mmio \
     --kernel /host/out/Image \
     --disk /host/out/guest.ext4 \
     --iommufd-vdevice \
