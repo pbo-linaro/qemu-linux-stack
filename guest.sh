@@ -8,7 +8,7 @@ set -x
 lspci -vvv
 
 # find device to connect
-sys_tsm_connect=$(find /sys | grep tsm/connect)
+sys_tsm_connect=$(find /sys | grep tsm/connect | tail -n 1)
 [ -f "$sys_tsm_connect" ]
 # /sys/devices/pci0000:00/0000:00:04.0/0000:01:00.0/tsm/connect -> 0000:01:00.0
 dev=$(basename $(realpath $(dirname $sys_tsm_connect)/..))
