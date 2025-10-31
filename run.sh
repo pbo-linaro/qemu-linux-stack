@@ -51,8 +51,8 @@ dd if=/dev/urandom of=out/disk bs=2M count=1
 -device ide-hd,drive=disk,bus=ahci.0 \
 -d unimp \
 -d guest_errors \
-
-#--trace 'smmuv3*'
+--trace 'smmuv3*' \
+--trace 'smmu_ptw*'
 
 rm -rf out/EFI
 rm -f out/disk

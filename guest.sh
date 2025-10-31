@@ -52,6 +52,7 @@ cd /host
     -m 256 \
     --loglevel=debug \
     --debug-mmio \
+    --debug-ioport \
     --kernel /host/out/Image \
     --disk /host/out/guest.ext4 \
     --iommufd-vdevice \
