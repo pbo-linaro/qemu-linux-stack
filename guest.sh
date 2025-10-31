@@ -46,17 +46,6 @@ rmdir guest
 
 INIT=${INIT:-/da_connect.sh}
 
-guest_efi=/tmp/guest_efi.img
-dd if=/dev/zero of=$guest_efi count=1 bs=256M
-mformat -i $guest_efi ::
-mcopy -i $guest_efi /host/out/Image ::
-cat > /tmp/startup.nsh << EOF
-fs0:
-Image nokaslr root=/dev/vda rw init=/init -- $INIT
-EOF
-mcopy -i $guest_efi /tmp/startup.nsh ::
-mdir -i $guest_efi
-
 cd /host
 ./out/lkvm run \
     --realm \
@@ -68,8 +57,6 @@ cd /host
     --iommufd-vdevice \
     --vfio-pci $dev \
     --params "root=/dev/vda rw init=/init -- $INIT"
-
-rm -f $guest_efi /tmp/startup.nsh
 
 # rebind pci device to ahci
 echo $dev > /sys/bus/pci/devices/$dev/driver/unbind
