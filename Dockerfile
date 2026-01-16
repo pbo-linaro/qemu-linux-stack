@@ -36,7 +36,8 @@ RUN mkdir /opt/compiler_wrappers && \
     for c in gcc g++ aarch64-linux-gnu-gcc aarch64-linux-gnu-g++; do \
         f=/opt/compiler_wrappers/$c && \
         echo '#!/usr/bin/env bash' >> $f && \
-        echo 'args="-fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -g -ggdb3"' >> $f && \
+        echo 'args="-fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -g"' >> $f && \
+        echo '[ "$CC_NO_DEBUG_MACROS" == "1" ] || args="$args -ggdb3"' >> $f && \
         echo '[[ "$*" =~ ' -E ' ]] && args=' >> $f && \
         echo "exec ccache /usr/bin/$c \"\$@\" \$args" >> $f && \
         chmod +x $f;\

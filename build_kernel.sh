@@ -27,6 +27,8 @@ clone()
 
 build()
 {
+    export CC_NO_DEBUG_MACROS=1
+
     pushd $(readlink -f linux)
     rm -f .config
     make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig -j$(nproc)
@@ -57,6 +59,8 @@ build()
         -e 's/aarch64-linux-gnu-gcc/clang -target aarch64-pc-none-gnu -Wno-unknown-warning-option -enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang/'
 
     popd
+
+    unset CC_NO_DEBUG_MACROS
 }
 
 output()
