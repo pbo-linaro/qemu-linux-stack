@@ -73,15 +73,15 @@ cd /host
     --vfio-pci $dev \
     --params "root=/dev/vda rw init=/init -- $INIT"
 
-# rebind pci device to ahci
-echo $dev > /sys/bus/pci/devices/$dev/driver/unbind
-echo ahci > /sys/bus/pci/devices/$dev/driver_override
-echo $dev > /sys/bus/pci/drivers_probe
-
-[ -e /dev/sda ] || sleep 1
-[ -e /dev/sda ] || sleep 1
-[ -e /dev/sda ] || sleep 1
-[ -e /dev/sda ] || sleep 1
-[ -e /dev/sda ] || sleep 1
-[ -e /dev/sda ]
-diff <(echo $disk_hash) <(sha1sum /dev/sda | cut -f 1 -d ' ')
+## rebind pci device to ahci
+#echo $dev > /sys/bus/pci/devices/$dev/driver/unbind
+#echo ahci > /sys/bus/pci/devices/$dev/driver_override
+#echo $dev > /sys/bus/pci/drivers_probe
+#
+#[ -e /dev/sda ] || sleep 1
+#[ -e /dev/sda ] || sleep 1
+#[ -e /dev/sda ] || sleep 1
+#[ -e /dev/sda ] || sleep 1
+#[ -e /dev/sda ] || sleep 1
+#[ -e /dev/sda ]
+#diff <(echo $disk_hash) <(sha1sum /dev/sda | cut -f 1 -d ' ')
