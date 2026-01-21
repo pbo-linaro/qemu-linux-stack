@@ -47,11 +47,11 @@ It's possible to automate execution of commands in the VM:
 
 ```
 # Current working directory is mounted as /host in VM
-# A script named guest.sh can be used to launch a nested guest
+# A script named host.sh can be used to launch a nested VM
 # Finally, a custom command can be passed to init script using INIT env var
 
-# To boot a nested guest, and call hostname:
-INIT='env INIT=hostname /host/guest.sh qemu-system-aarch64' ./run.sh qemu-system-aarch64
+# To boot a nested vm, and call hostname:
+INIT='env INIT=hostname /host/host.sh qemu-system-aarch64' ./run.sh qemu-system-aarch64
 
 # In case command fail, init will trigger a Kernel panic
 INIT='false' ./run.sh qemu-system-aarch64
