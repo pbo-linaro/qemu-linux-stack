@@ -23,6 +23,4 @@ build()
 }
 
 build host
-if [ -d rootfs/guest ]; then
-    build guest
-fi
+build guest
